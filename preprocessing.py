@@ -288,7 +288,38 @@ def get_behavioral_test(filepath, test):
         filename = "TAP_Working_Memory/TAP-Working Memory.csv"
         cols = [1]
 
-        # notes: should really be wm2 / (wm6 / (wm6 + wm7 + wm9)) 
+        # notes: should really be wm2 / (wm6 / (wm6 + wm7 + wm9))
+
+    elif test == "tmt":
+        """
+        TMT_1 = time it took to connect numbers (seconds. milliseconds)
+        TMT_2 = brain functions based on performance for Trail A (Reitan & Wolfson, 1988)
+        TMT_3 = how many errors did the pp. make
+        TMT_4 = comments
+        TMT_5 = time it took to connect numbers and letters (seconds. milliseconds)
+        TMT_6 = brain functions based on performance for Trail B (Reitan & Wolfson, 1988)
+        TMT_7 = how many errors did the pp. make
+        TMT_8 = comments
+        """ 
+
+        filename = "TMT/TMT.csv"
+        cols = [2]
+
+        # notes: should probably sum 2 and 6
+
+    elif test == "wst":
+        """
+        WST_1 = WST raw data; how many real words did the pp. recognize correctly
+        WST_2 = z-scale
+        WST_3 = IQ-scale
+        WST_4 = Z-scale
+        WST_5 = comments
+        """
+
+        filename = "WST/WST.csv"
+        cols = [3]
+
+        # notes: 
 
     else:
         print("behavioral test not configured :", test)
@@ -304,10 +335,43 @@ def get_behavioral_test(filepath, test):
 def preprocess_behavioral_dict(behavioral_dict):
     """
     convert dict values (string) to standardized (percentile) floats
-    filter unfilled columns (set to 0.5?)
+    filter unfilled rows (set to 0.5?)
+
+    behavioral_dict     : dictionary to preprocess
+    return              : processed behavioral dict
     """
 
-    return None
+    num_patients = len(list(behavioral_dict.values()))
+    num_cols = len(list(behavioral_dict.values())[0])
+    
+    minima = [np.inf] * num_cols
+    maxima = [-np.inf] * num_cols
+
+    # find min and max
+    empty_cells = {}
+    for patient in behavioral_dict:
+        for col in range(num_cols):
+            try:
+                behavioral_dict[patient][col] = float(behavioral_dict[patient][col])
+                minima[col] = min(behavioral_dict[patient][col], minima[col])
+                maxima[col] = max(behavioral_dict[patient][col], maxima[col])
+            except ValueError:
+                behavioral_dict[patient][col] = 0
+                if patient not in empty_cells:
+                    empty_cells[patient] = [col]
+                else:
+                    empty_cells[patient].append(col)
+    
+    # rescale values
+    for patient in behavioral_dict:
+        behavioral_dict[patient] = [(behavioral_dict[patient][i] - minima[i]) / (maxima[i] - minima[i]) for i in range(num_cols)]
+
+    # do something with empty values
+    for patient in empty_cells:
+        for col in empty_cells[patient]:
+            behavioral_dict[patient][col] = 0.5
+
+    return behavioral_dict
 
 
 def preprocess(filepath, sync=False):
@@ -343,8 +407,7 @@ def main():
     """
     for testing
     """
-    # preprocess(DATA_PATH)
-    get_behavioral_test(DATA_PATH, "tap")
+    preprocess(DATA_PATH)
 
 if __name__ == "__main__":
     main()
