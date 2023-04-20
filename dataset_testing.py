@@ -36,6 +36,23 @@ def make_gif(data):
 
     os.system("convert @image_list.txt {}.gif".format(gif_name))
 
+
+def make_mri_gif(data):
+    for i in range(data.shape[0]):
+        plt.imshow(data[i])
+        plt.savefig("mri_images/" + str(i).zfill(3) + ".png")
+        plt.close()
+
+    gif_name = "mri-front"
+    file_list = glob.glob("mri_images/*.png")
+    list.sort(file_list, key=lambda x: int(x[11:].split(".png")[0]))
+    with open("image_list.txt", "w") as file:
+        for item in file_list:
+            file.write("%s\n" % item)
+
+    os.system("convert @image_list.txt {}.gif".format(gif_name))
+
+
 def eeg_plot(raw_mne):
     print(raw_mne[0])
 
@@ -51,9 +68,14 @@ def main():
     # test = nib.load("../data/mri/sub-032301/ses-01/func/sub-032301_ses-01_task-rest_acq-AP_run-01_bold.nii").get_fdata()
     # make_gif(test)
 
-    file = "../data/eeg/sub-032301/RSEEG/sub-032301.vhdr"
-    raw_mne = mne.io.read_raw_brainvision(file)
-    eeg_plot(raw_mne)
+    mri_path = "../data/mri_preprocessed/sub-032301.npy"
+    mri_data = np.load(mri_path)
+    mri_data = np.transpose(mri_data, [2, 1, 0])
+    make_mri_gif(mri_data)
+
+    # file = "../data/eeg/sub-032301/RSEEG/sub-032301.vhdr"
+    # raw_mne = mne.io.read_raw_brainvision(file)
+    # eeg_plot(raw_mne)
 
 if __name__ == "__main__":
     main()

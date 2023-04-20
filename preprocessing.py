@@ -5,6 +5,7 @@ import mne
 import gzip
 import shutil
 import csv
+import skimage
 from tqdm import tqdm
 
 """
@@ -18,6 +19,8 @@ create data directory outside of the NeuroVision repo:
 DATA_PATH = "../data/"
 MRI_DIR, MRI_RESULT_DIR = "mri/", "mri_preprocessed/"
 EEG_DIR, EEG_RESULT_DIR = "eeg/", "eeg_preprocessed/"
+BEHAVIORAL_DIR = "behavioral/"
+VGG_DIR = "mri_vgg/"
 
 def compress_MRI(filepath, patientID):
     """
@@ -43,6 +46,32 @@ def compress_MRI(filepath, patientID):
     if not os.path.exists(filepath + "../" + MRI_RESULT_DIR):
         os.mkdir(filepath + "../" + MRI_RESULT_DIR)
     np.save(filepath + "../" + MRI_RESULT_DIR + patientID + ".npy", data)
+
+
+def resize_MRI(arr, shape=(224, 224)):
+    """
+    resizes MRI data
+
+    arr             : preprocessed MRI numpy array
+    shape           : compressed shape (224 x 224 for VGG compatibility)
+    """
+
+    new_MRI_arr = np.empty((arr.shape[0], shape[0], shape[1]))
+    for i in range(arr.shape[1]):
+        new_MRI_arr[i] = skimage.transform.resize(arr[i], shape, preserve_range=True)
+    
+    return new_MRI_arr
+
+
+def add_colorchannels(mri_data):
+    """
+    adds color channels to mri data
+
+    mri_data        : preprocessed MRI numpy array
+    return          : expanded mri data
+    """
+    axes = list(range(len(mri_data.shape) + 1))
+    return np.transpose(np.stack((mri_data, mri_data, mri_data)), axes=axes[1:] + [0])
 
 
 def reconfigure_VHDR(filepath, patientID):
@@ -91,7 +120,6 @@ def compress_preprocessed_EEG(filepath, patientID):
     return      : none
     """
     raw_mne = mne.io.read_raw_eeglab(filepath + patientID + "/" + patientID + "_EC.set")
-    print(raw_mne[:].shape)
     eeg = np.array(raw_mne[0][0][0])
 
     trim = 10000
@@ -110,7 +138,7 @@ def get_behavioral_test(filepath, test):
     return      : dictionary of behavioral scores for given metric
     """
 
-    BEHAVIORAL_DIR = filepath + "behavioral/Cognitive_Test_Battery_LEMON/"
+    BEHAVIORAL_DIR = filepath + "Cognitive_Test_Battery_LEMON/"
 
     behavioral_dict = {}
     filename = ""
@@ -399,7 +427,7 @@ def preprocess(filepath, sync=False):
         for mri_patientID in tqdm(mri_patientIDs):
             compress_MRI(filepath + MRI_DIR, mri_patientID)
         print("preprocessing EEG data ...")
-        for eeg_patientID in tqdm(eeg_patientIDs):
+        for eeg_patientID in eeg_patientIDs:
             compress_preprocessed_EEG(filepath + EEG_DIR, eeg_patientID)
 
 
