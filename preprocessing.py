@@ -1,6 +1,8 @@
+import tensorflow as tf
 import nibabel as nib
 import numpy as np
 import os
+import sys
 import mne
 import gzip
 import shutil
@@ -21,6 +23,116 @@ MRI_DIR, MRI_RESULT_DIR = "mri/", "mri_preprocessed/"
 EEG_DIR, EEG_RESULT_DIR = "eeg/", "eeg_preprocessed/"
 BEHAVIORAL_DIR = "behavioral/"
 VGG_DIR = "mri_vgg/"
+
+
+
+def applyACS(mri_data, patientIDs, save=True, path="../data/mri_acs/", downsampling_factor=2):
+	"""
+	acs preprocesses mri data
+	mri_data		: input of shape (num_patients, res, res, res)
+	patientIDs		: list of patientIDs
+	return			: acs data of shape (num_patients, res, res, 3)
+	"""
+
+	print("computing ACS (axial-coronal-sagaittal) data")
+
+	num_patients, resX, resY, resZ = mri_data.shape
+	resX = int(resX / downsampling_factor)
+	resY = int(resY / downsampling_factor)
+	output = np.empty((num_patients, resX * resY, resZ, 3))
+
+	for patient in tqdm(range(num_patients)):
+		for i, x in enumerate(range(0, resX, downsampling_factor)):
+			for j, y in enumerate(range(0, resY, downsampling_factor)):
+				output[patient][i*resX + j, :, 0] = mri_data[patient, x, y, :]
+				output[patient][i*resX + j, :, 1] = mri_data[patient, :, x, y]
+				output[patient][i*resX + j, :, 2] = mri_data[patient, x, :, y]
+
+	if save:
+		print("saving ACS output to", path, "...")
+		if not os.path.exists(path):
+			os.mkdir(path)
+		with tqdm(total=len(patientIDs)) as pbar:
+			for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
+				np.save(path + patientID, patient_output)
+				pbar.update(1)
+
+	return output
+
+
+def applyVGG(mri_data, patientIDs, downsampling_factor=2, save=True, path="../data/mri_vgg/"):
+	"""
+	applies pretrained vgg to input
+	mri_data		: input of shape (num_patients, res, res, res, 3)
+	patientIDs		: list of patientIDs
+	"""
+
+	inputX = tf.transpose(mri_data, [1, 0, 2, 3, 4])
+	inputY = tf.transpose(mri_data, [3, 0, 1, 2, 4])
+	inputZ = tf.transpose(mri_data, [2, 0, 3, 1, 4])
+
+	print("collecting VGG data ...")
+
+	vgg = tf.keras.applications.VGG19(
+			include_top=False,
+			weights="imagenet",
+			input_tensor=None,
+			input_shape=mri_data.shape[2:],
+			pooling=None,
+		)
+	
+	print("passing MRI data through VGG ...")
+
+	outputX, outputY, outputZ = [], [], []
+	for i in tqdm(range(0, inputX.shape[0], downsampling_factor)):
+		outputX.append(vgg(inputX[i]))
+		outputY.append(vgg(inputY[i]))
+		outputZ.append(vgg(inputZ[i]))
+	outputX = tf.stack(outputX)
+	outputY = tf.stack(outputY)
+	outputZ = tf.stack(outputZ)
+
+	output = tf.concat([outputX, outputY, outputZ], axis=0)
+	output = tf.transpose(output, [1, 0, 2, 3, 4])
+
+	if save:
+		print("saving VGG output to", path, "...")
+		with tqdm(total=len(patientIDs)) as pbar:
+			for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
+				np.save(path + patientID, patient_output)
+				pbar.update(1)
+
+	return output
+
+
+def load_preprocessing(path="../data/mri_vgg/"):
+	"""
+	loads saved data
+	"""
+	patientIDs = os.listdir(path)
+	if ".DS_Store" in patientIDs:
+		patientIDs.remove(".DS_Store")
+
+	print("loading data from", path, "...")
+
+	data = []
+	for patientID in tqdm(patientIDs):
+		data.append(np.load(path + patientID))
+	data = np.stack(data)
+
+	patientIDs = [patientID.replace(".npy", "") for patientID in patientIDs]
+
+	return patientIDs, data
+
+
+def train_test_split(data, prop=0.7):
+    """
+    splits data into training and testing segments
+    """
+    cutoff = int(len(data) * prop)
+
+    return data[:cutoff], data[cutoff:]
+
 
 def compress_MRI(filepath, patientID):
     """
@@ -111,7 +223,7 @@ def compress_raw_EEG(filepath, patientID):
     np.save(filepath + "../" + EEG_RESULT_DIR + patientID + ".npy", meg_eeg)
 
 
-def compress_preprocessed_EEG(filepath, patientID):
+def compress_preprocessed_EEG(filepath, patientID, num_channels=60, timesteps=1000):
     """
     compress a patient EEG from .set into a single numpy vector, save to EEG_RESULT_DIR
 
@@ -119,14 +231,30 @@ def compress_preprocessed_EEG(filepath, patientID):
     patientid   : id of patient
     return      : none
     """
-    raw_mne = mne.io.read_raw_eeglab(filepath + patientID + "/" + patientID + "_EC.set")
-    eeg = np.array(raw_mne[0][0][0])
 
-    trim = 10000
-    border = int((len(eeg) - trim) / 2)
+    with HiddenPrints():
+        raw_mne = mne.io.read_raw_eeglab(filepath + patientID + "/" + patientID + "_EC.set", preload=True)
+        raw_mne.set_eeg_reference(ref_channels='average', projection=False)
+        
+        raw_mne.filter(l_freq=0.5, h_freq=50, picks='eeg') # bandpass filter
+        raw_data = raw_mne.get_data()
+        
+        # remove channels with zero standard deviation
+        std_channels = np.std(raw_data, axis=1)
+        nonzero_std_channels = np.where(std_channels > 0)[0]
+        raw_data = raw_data[nonzero_std_channels]
+
+        if len(nonzero_std_channels) < 60:
+            return
+        
+        border = 1000
+        data = np.empty((1, num_channels, timesteps))
+        for i in range(num_channels):
+            data[0, i, :] = raw_data[i, border : border + timesteps]
+
     if not os.path.exists(filepath + "../" + EEG_RESULT_DIR):
         os.mkdir(filepath + "../" + EEG_RESULT_DIR)
-    np.save(filepath + "../" + EEG_RESULT_DIR + patientID + ".npy", eeg[border:border + trim])
+    np.save(filepath + "../" + EEG_RESULT_DIR + patientID + ".npy", data)
 
 
 def get_behavioral_test(filepath, test):
@@ -414,9 +542,12 @@ def preprocess(filepath, sync=False):
     print("preprocessing data from", filepath, "...")
     
     mri_patientIDs = set(os.listdir(filepath + MRI_DIR))
-    mri_patientIDs.remove(".DS_Store")
+    if ".DS_Store" in mri_patientIDs:
+        mri_patientIDs.remove(".DS_Store")
     eeg_patientIDs = set(os.listdir(filepath + EEG_DIR))
-    eeg_patientIDs.remove(".DS_Store")
+    if ".DS_Store" in eeg_patientIDs:
+        eeg_patientIDs.remove(".DS_Store")
+        
     if sync:
         patientIDs = mri_patientIDs.intersection(eeg_patientIDs)
         for patientID in tqdm(patientIDs):
@@ -439,3 +570,15 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = open(os.devnull, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stdout = self._original_stdout

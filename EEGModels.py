@@ -49,7 +49,7 @@ from tensorflow.keras.constraints import max_norm
 from tensorflow.keras import backend as K
 
 
-def EEGNet(nb_classes, Chans = 64, Samples = 128, 
+def EEGNet(nb_classes, Chans = 60, Samples = 1000, 
              dropoutRate = 0.5, kernLength = 64, F1 = 8, 
              D = 2, F2 = 16, norm_rate = 0.25, dropoutType = 'Dropout'):
     """ Keras Implementation of EEGNet

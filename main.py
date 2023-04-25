@@ -1,16 +1,38 @@
-import model
 import numpy as np
 import os
 from tqdm import tqdm
+import pandas as pd
 import tensorflow as tf
 
 import preprocessing
 from preprocessing import get_behavioral_test, preprocess_behavioral_dict
-import MRIModel
-from MRIModel import VGG3DModel, VGGSlicedModel
+import models
+from models import VGG3DModel, VGGSlicedModel, VGGACSModel, EEGModel
 
 
-def get_patientIDs(filepath, mri_dir, eeg_dir):
+
+def print_results(models, test_data, test_labels, metrics):
+    """
+    prints the results of each model after training
+    """
+
+    table = []
+    
+    for model in models:
+        table.append([])
+        for metric in metrics:
+            table[-1].append(metric(test_labels, model.call(test_data)).numpy())
+    
+    table_df = pd.DataFrame(
+        data=table, 
+        index=[model.name for model in models], 
+        columns=[str(type(metric)).split('\'')[1].split('.')[-1] for metric in metrics])
+    print()
+    print(table_df)
+    print()
+
+
+def get_patientIDs(filepath, mri_dir, eeg_dir, sync=True):
     """
     retrieve shared list of patientIDs
     filepath        : path to data directory
@@ -20,9 +42,10 @@ def get_patientIDs(filepath, mri_dir, eeg_dir):
 
     mri_patientIDs = set(os.listdir(filepath + mri_dir))
     eeg_patientIDs = set(os.listdir(filepath + eeg_dir))
-    if ".DS_Store" in mri_patientIDs:
-        mri_patientIDs.remove(".DS_Store")
-    patientIDs = list(mri_patientIDs.intersection(eeg_patientIDs))
+    if ".DS_Store" in mri_patientIDs: mri_patientIDs.remove(".DS_Store")
+    if ".DS_Store" in eeg_patientIDs: eeg_patientIDs.remove(".DS_Store")
+    if sync: patientIDs = list(mri_patientIDs.intersection(eeg_patientIDs))
+    else: patientIDs = list(mri_patientIDs.union(eeg_patientIDs))
     patientIDs = [patientID.replace(".npy", "") for patientID in patientIDs]
     patientIDs.sort()
 
@@ -110,24 +133,65 @@ def load_data(filepath, mri_dir, eeg_dir, behavioral_dir, patientIDs):
 
 def main(train=False, preprocess=True):
     if preprocess:
-        preprocessing.preprocess(preprocessing.DATA_PATH, sync=False)
+        preprocessing.preprocess(preprocessing.DATA_PATH, sync=False) 
     
-    patientIDs = get_patientIDs(preprocessing.DATA_PATH, preprocessing.MRI_RESULT_DIR, preprocessing.EEG_RESULT_DIR)
+    patientIDs = get_patientIDs(preprocessing.DATA_PATH, preprocessing.MRI_RESULT_DIR, preprocessing.EEG_RESULT_DIR, sync=True)
+
+    #temp
+    # for patientID in patientIDs:
+    #     preprocessing.compress_preprocessed_EEG(preprocessing.DATA_PATH + preprocessing.EEG_DIR, patientID)
+
     mri_data, eeg_data, behavioral_data = load_data(
         preprocessing.DATA_PATH, 
         preprocessing.MRI_RESULT_DIR, 
         preprocessing.EEG_RESULT_DIR,
         preprocessing.BEHAVIORAL_DIR,
         patientIDs)
-    mri_data = preprocessing.add_colorchannels(mri_data)
+    
+    # mri_data = preprocessing.add_colorchannels(mri_data)
+    # _, mri_data = preprocessing.load_preprocessing("../data/mri_acs/")
+    # preprocessing.applyVGG(mri_data, patientIDs, downsampling_factor=4)
 
-    num_samples = mri_data.shape[0]
-    train_prop = 0.7
-    num_train_samples = int(train_prop * num_samples)
-    train_mri_data, test_mri_data = mri_data[:num_train_samples], mri_data[num_train_samples:]
-    train_behavioral_data, test_behavioral_data = behavioral_data[:num_train_samples], behavioral_data[num_train_samples:]
+    mri_data = preprocessing.applyACS(mri_data, patientIDs, downsampling_factor=4)
 
-    MRIModel.applyVGG(mri_data, patientIDs, downsampling_factor=4)
+    train_patientIDs, test_patientIDs = preprocessing.train_test_split(patientIDs)
+    train_mri_data, test_mri_data = preprocessing.train_test_split(mri_data)
+    train_eeg_data, test_eeg_data = preprocessing.train_test_split(eeg_data)
+    train_behavioral_data, test_behavioral_data = preprocessing.train_test_split(behavioral_data)
+
+
+    eegnet_model = models.EEGModel(output_units=behavioral_data.shape[1])
+    eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
+    eegnet_model.build(train_eeg_data.shape)
+    eegnet_model.summary()
+    if train:
+        eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=10, validation_data=(test_eeg_data, test_behavioral_data))
+
+    print("\ntraining control models ...\n")
+
+    center_model = models.CenterModel(name="control (center)", shape=test_behavioral_data.shape)
+    mean_model = models.MeanModel(name="control (mean)", train_labels=train_behavioral_data)
+    median_model = models.MedianModel(name="control (median)", train_labels=train_behavioral_data)
+    simple_nn = models.SimpleNN(name="control (1layerNN)", output_units=behavioral_data.shape[1])
+    simple_nn.compile(optimizer=simple_nn.optimizer, loss=simple_nn.loss, metrics=[])
+    simple_nn.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+
+    print("\ntraining new models ...\n")
+
+    vgg_acs_model = VGGACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1])
+    vgg_acs_model.compile(
+		optimizer=vgg_acs_model.optimizer,
+		loss=vgg_acs_model.loss,
+		metrics=[],
+	)
+    vgg_acs_model.build(train_mri_data.shape)
+    vgg_acs_model.summary()
+    if train:
+        vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+
+    print_results(
+        [center_model, mean_model, median_model, simple_nn, vgg_acs_model], 
+        test_mri_data, test_behavioral_data, [tf.keras.metrics.MeanSquaredError()])
 
     """
     model = VGG3DModel(output_units=behavioral_data.shape[1])
@@ -159,5 +223,5 @@ if __name__ == "__main__":
     os.system("clear")
     main(
         train       = True,
-        preprocess  = True
+        preprocess  = False
         )
