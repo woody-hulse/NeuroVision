@@ -253,7 +253,7 @@ class EEGModel(tf.keras.Model):
 
 
         
-        eegnet = tf.keras.models.load_model('../EEGNet-8-2-weights.h5').layers
+        eegnet = tf.keras.models.load_model('data/weights/EEGNet-8-2-weights.h5').layers
         self.tail = []
         for layer in eegnet:
             if type(layer) == type(tf.keras.layers.Dense(10)):
