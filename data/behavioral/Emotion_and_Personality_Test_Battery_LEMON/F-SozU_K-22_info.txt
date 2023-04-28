@@ -1,0 +1,34 @@
+﻿F-SozU K-22
+Social Support Questionnaire
+
+References
+1. Fydrich, T., Sommer, G., & Brähler, E. (2007). F-SOZU: Fragebogen zur sozialen Unterstützung. Göttingen: Hogrefe.
+2. Fydrich, T., Geyer, M., Hessel, A., Sommer, G. & Brähler, E. (1999). Fragebogen zur Sozialen Unterstützung (F-SozU): Normierung an einer repräsentativen Stichprobe. Diagnostica, 45, 212-216.
+
+
+Timeframe:
+Trait
+
+
+22 Items
+
+Response scores:
+from 1 (does not apply at all) to 5 (strongly applies).
+
+1 = trifft überhaupt nicht zu
+2
+3
+4
+5 = trifft genau zu
+
+
+Subscales/Columns:
+FSoZu_EU: Emotional Support	
+FSoZu_PU: Practical support	
+FSoZu_SI: Social Integration	
+FSoZu_Zuf: Satisfaction with Social Support	
+FSoZu_Vert: Availability of Trusted Person
+
+
+
+

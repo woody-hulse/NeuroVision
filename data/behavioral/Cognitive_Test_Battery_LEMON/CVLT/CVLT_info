@@ -1,0 +1,30 @@
+CVLT
+California Verbal Learning Test (German adaption)
+
+Reference: 
+H. Niemann, W. Sturm, A.I.T. Thöne-Otto, K. Willmes (2008): California Verbal Learning Test (CVLT). Pearson Assesment & Information GmbH. Frankfurt am Main.
+
+task
+memory task in which the subject is asked to recall a list consisting of 16 words that is read by the instructor. The subject hears an recalls the list 5 times. Afterwards an interference task is given to the subject. The subject hears another list consisting again of 16 words. The subject should recall this list. Afterwards the subject should recall the first list again. Then the subject should arrange the words from the first list into 4 different categories. Another free recall takes place after 20 minutes.(In this time the subject did several TAP-tasks.) After the free recall the subject is asked to arrange the words from the first list again into categories. Then another list of words is presented to the subject. This time the subject has to decide if the word heard belongs to the first list or not.
+
+Measures:
+short and long term memory performance, recalls, recognition, mistakes (intrusions and repetitions) as well as indications of the degree in which stimuli may interfere with already learned material
+
+Coding:
+
+1= test version of the CVLT
+2= number of correct  recalls after hearing the list for the first time
+3= number of correct  recalls after hearing the list for the fifth time
+4= Proactive Interference (Interference from previosly learned information)
+5= Retroactive Interference
+6= sum of all correct recalls from first until fifth trial
+7= sum of all correct recalls from first until fith trial with an age-gender-education correction
+8= number of correct recalls from the interference task (List B)
+9= number of correct recalls (short delay)
+10= number of correct recalls when category cues are presented (short delay)
+11= number of correct recalls after 20 minutes (long delay recall) 
+12= number of correct recalls when category cues are presented (long delay recall)
+13= delayed recognition memory performance
+14= overall repetitions
+15=overall intrusions
+16= comments

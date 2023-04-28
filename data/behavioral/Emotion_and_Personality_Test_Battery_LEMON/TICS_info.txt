@@ -1,0 +1,39 @@
+﻿TICS
+Trierer Inventar zum Chronischen Stress
+
+References
+1. Schulz, P., & Schlotz, W. (1999). Trierer Inventar zur Erfassung von chronischem Stress (TICS): Skalenkonstruktion, teststatistische Überprüfung und Validierung der Skala Arbeitsüberlastung. Diagnostica. doi: 10.1026//0012-1924.45.1.8
+2. Schulz, P., Schlotz, W., & Becker, P. (2004). Trierer Inventar zum chronischen Stress: TICS. Hogrefe.
+
+
+Timeframe
+Last 3 months
+
+
+57 Items
+
+
+Response scores:
+0 (never) to 4 (very often).
+
+0 = nie 
+1 = selten
+2 = manchmal
+3 = häufig
+4 = sehr häufig
+
+
+Subscales/Columns:
+	
+TICS_WorkOverload: Work Overload	
+TICS_SocialOverload: Social Overload	
+TICS_PressuereToPerform: Pressuere To Perform		
+TICS_WorkDiscontent: Work Discontent: 	
+TICS_WorkDemands: Excessive Demands at Work	
+TICS_LackSocialRecognition: Lack Social Recognition	
+TICS_SocialTension:Social Tension		
+TICS_SocialIsolation: Social Isolation	
+TICS_ChronicWorrying: Chronic Worrying	
+TICS_ScreeningScaleS: Screening Scales
+
+

@@ -1,0 +1,38 @@
+﻿CERQ
+Cognitive Emotion Regulation Questionnaire
+
+References
+1. Garnefski, N., Kraaij, V., & Spinhoven, P. (2001). Negative life events, cognitive emotion regulation and emotional problems. Personality and Individual differences, 30(8), 1311-1327. doi:10.1016/S0191-8869(00)00113-6
+2. Loch, N., Hiller, W., & Witthoeft, M. (2011). The Cognitive Emotion Regulation Questionnaire (CERQ). Psychometric evaluation of a German adaptation. Zeitschrift für Klinische Psychologie und Psychotherapie, 40(2), 94-106. DOI: 10.1026/1616-3443/a000079
+
+
+Timeframe
+Trait (im Algemeinen denken)
+
+
+27 Items
+
+Response scales:
+from 1 (almost never) to 5 (almost always)
+
+0 = (fast) nie
+1 = manchmal
+2 = regelmäßig
+3 = häufig
+4 = fast immer
+
+Subscales/Columns:	
+CERQ_SelfBlame: Self Blame	
+CERQ_Acceptance: Acceptance	
+CERQ_Rumination: Rumination	
+CERQ_positiveRefocusing: Positive Refocusing	
+CERQ_RefocusOnPlanning: Refocus On Planning	
+CERQ_PositiveReappraisal: Positive Reappraisal	
+CERQ_PuttingIntoPerspective: Putting Into Perspective	
+CERQ_Catastrophizing: Catastrophizing		
+CERQ_BlamingOthers: Blaming Others
+
+
+
+
+

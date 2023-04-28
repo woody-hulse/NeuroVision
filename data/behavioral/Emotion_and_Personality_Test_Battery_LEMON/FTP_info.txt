@@ -1,0 +1,32 @@
+﻿FTP
+Future Time Perspective
+
+References
+"1. Carstensen, L. L., & Lang, F. R. (1996). Future Time Perspective Scale.
+Unpublished Manuscript.
+"
+2. Lang, F. R., & Carstensen, L. L. (2002). Time counts: Future time perspective, goals and social relationships. Psychology and Aging, 17, 125-139. doi:10.1037//0882-7974.17.1.125 [PMID: 11931281]
+
+
+Timeframe:
+State
+
+10. Items
+
+Response Scores:
+from 1 (very untrue), to 7 (very true). 
+
+1 = Überhaupt nicht
+2
+3
+4
+5
+6
+7 = Sehr gut
+
+
+Subscales/Columns:
+FTP_SUM: Future Time Perspective
+
+
+

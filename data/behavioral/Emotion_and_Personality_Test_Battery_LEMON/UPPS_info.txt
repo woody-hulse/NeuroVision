@@ -1,0 +1,27 @@
+﻿UPPS
+Impulsive Behavior Scale
+
+References:
+1. Whiteside, S. P., & Lynam, D. R. (2001). The five factor model and impulsivity: Using a structural model of personality to understand impulsivity. Personality and individual differences, 30(4), 669-689.
+2. Schmidt, R. E., Gay, P., d’Acremont, M., & Van der Linden, M. (2008). A German adaptation of the UPPS Impulsive Behavior Scale: Psychometric properties and factor structure. Swiss Journal of Psychology, 67(2), 107-112.
+
+
+Timeframe:
+Trait
+
+45 Items
+
+Response scores:
+from 1 (agree strongly) to 4 (disagree strongly).
+
+1 = sehr zutreffend
+2 = eher zutreffend
+3 = eher unzutreffend
+4 = sehr unzutreffend
+
+Subscales/Columns:
+UPPS_urgency: Urgency	
+UPPS_lack_premeditation: Lack of Premeditation		
+UPPS_lack_perseverance: Lack of Perseverance	
+UPPS_sens_seek: Sensation Seeking
+

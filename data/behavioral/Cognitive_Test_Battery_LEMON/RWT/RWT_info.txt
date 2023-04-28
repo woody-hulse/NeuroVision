@@ -1,0 +1,50 @@
+RWT
+Regensburger Wortflüssigkeits-Test - fluidness of ideas & cognitive flexibilty
+
+Reference:
+Aschenbrenner, S., Tucha, O., Lange, K.L. (2000) Regensburger Wortflüssigkeits-Test. Hogrete.Verlag GmbH & Co. KG
+
+Aim:
+Assess semantic and categorical word fluency, as well as formal-lexical word fluency.
+
+Task description:
+S-word paradigm
+Participants had 2 min. time to verbally list as many words as possible starting with the letter S.
+
+Participants were instructed to include words that are in the DUDEN. No proper names and no repetition of words and stem were counted.
+
+
+Animals paradigm
+Participants had 2 min. time to verbally list as many animals as possible
+Repetitions of stem were counted.
+
+
+Column names in the csv file:
+
+S-words
+RWT_1 = how many s-words did the participant name during the first minute (according to rules)
+RWT_2 = percentile rank of correct words for the subtest 's-words' (1 minute)
+RWT_3 = how many repetitions during the first minute
+RWT_4 = how many rule breaks during the first minute
+RWT_5 = how many s-words did the participant name during the second minute (according to rules)
+RWT_6 = how many repetitions during the second minute
+RWT_7 = how many rule breaks during the second minute
+RWT_8 = how many s-words did the pp. name in total (according to rules); two minutes
+RWT_9 = percentile rank of correct words for the subtest 's-words' (2 minutes)
+RWT_10 = how many repetitions in total; two minutes
+RWT_11 = how many rule breaks in total; two minutes
+RWT_12 = comments (s-words)
+
+Animals
+RWT_13 = how many animals did the participant. name in the first minute (according to rules)
+RWT_14 = percentile rank of correct words for the subtest 'animal' (1 minute)
+RWT_15 = how many repetitions during the first minute (animals)
+RWT_16 = how many rule breaks during the first minute (animals)
+RWT_17 = how many animals did the pp. name during the second minute (according to rules)
+RWT_18 = how many repetitions during the second minute (animals)
+RWT_19 = how many rule breaks during the second minute (animals)
+RWT_20 = how many animals did the pp. name in total (according to rules); two minutes
+RWT_21 = percentile rank of correct words for the subtest 'animals' (2 minutes)
+RWT_22 = how many repetitions in total; two minutes (animals)
+RWT_23 = how many rule breaks during the second minute (animals)
+RWT_24 = comments (animals)

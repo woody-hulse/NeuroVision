@@ -1,0 +1,31 @@
+﻿BISBAS
+Behavioral Inhibition and Approach System
+
+References
+1. Carver, C. S., & White, T. L. (1994). Behavioral inhibition, behavioral activation, and affective responses to impending reward and punishment: the BIS/BAS scales. Journal of personality and social psychology, 67(2), 319. doi: 10.1037/0022-3514.67.2.319
+2. Strobel, A., Beauducel, A., Debener, S., & Brocke, B. (2001). Eine deutschsprachige Version des BIS/BAS-Fragebogens von Carver und White. Zeitschrift für Differentielle und diagnostische Psychologie. doi: 10.1024//0170-1789.22.3.216
+
+
+Timeframe
+Trait
+
+
+http://psycnet.apa.org/journals/psp/67/2/319/
+
+
+Assessing:
+"... dispositional BIS [behavioral inihibition system] and BAS [behavioral activation system] sensitivities" (Carver and White, 1994, page 319)
+
+
+Response scale: 
+Four-point Likert-scale (1 = “very false for me” to 4 = “very true for me”)
+
+Subscales/Columns:
+	
+BAS_Drive:  BAS Subscale Drive
+BAS_Fun: BAS Subscale Fun Seeking
+BAS_Reward: BAS Subscale Reward Responsiveness
+BIS: Behavioral Inhibition Score
+
+
+

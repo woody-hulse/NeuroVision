@@ -1,0 +1,35 @@
+﻿FEV
+Fragebogen zum Essverhalten
+
+References:
+1. Stunkard, A. J., & Messick, S. (1985). The three-factor eating questionnaire to measure dietary restraint, disinhibition and hunger. Journal of psychosomatic research, 29(1), 71-83. doi:10.1016/0022-3999(85)90010-8
+2. Pudel, D. & Westenhöfer, J. (1989). Fragebogen zum Eßverhalten (FEV). Göttingen: Hogrefe.
+
+
+Timeframe:
+Trait
+
+
+Answer Codes:
+from dichotomous scales (applies, does not apply) to 4-point Likert scales from 1 (always) to 4 (never) or 1 (very much) to 4 (not). From 58-60 are answers to select from the list.
+
+
+
+
+
+Item 60
+multiple choice (many options possible)
+
+
+Subscales/Columns:
+ID	
+FEV_KK:	Cognitive Restraint  of eating
+FEV_STOER: Disinhibition of Eating	
+FEV_HUNGER: Susceptibility to Hunger   
+      
+                        
+       
+                        
+
+
+

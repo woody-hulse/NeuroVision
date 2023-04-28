@@ -1,0 +1,133 @@
+Availability Table of LEMON Data
+Day 2
+
+
+In addition to the meta file, we include a data availability (.csv) file which includes all the LEMON data available for each specific data acquisition section with subscales (1=available, 0=not available).   
+
+
+Abbreviations/Items names
+
+
+MDBF_Day2_GS_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 2) Good-Bad
+MDBF_Day2_WM_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 2) Awake-Tired
+MDBF_Day2_RU_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 2) Calm-Nervous
+EEG_RestingState_Raw	: Resting-state EEG Raw Data
+EEG_Preprocessed	: Resting-state EEG Preprocessed Data
+EEG_Digitized_Locations	: EEG Digitized Locations (Localizer)
+Drug_Avail	: Drug Strip Test (negative /positive)
+NEOFFI_Neuroticism	: (Big-Five of Personality (NEO-FFI) Neuroticism
+NEOFFI_Extraversion	: (Big-Five of Personality (NEO-FFI) Extraversion
+NEOFFI_OpennessForExperiences	: (Big-Five of Personality (NEO-FFI) Openness For Experiences
+NEOFFI_Agreeableness	: (Big-Five of Personality (NEO-FFI) Agreeableness
+NEOFFI_Conscientiousness	: (Big-Five of Personality (NEO-FFI) Conscientiousness
+UPPS_urgency	: (Impulsive Behavior Scale) Urgency
+UPPS_lack_premeditation	: (Impulsive Behavior Scale) Lack of Premeditation
+UPPS_lack_perseverance	: (Impulsive Behavior Scale) Lack of Perseverance
+UPPS_sens_seek	: (Impulsive Behavior Scale) Sensation Seeking
+BAS_Drive	: (Behavioral Inhibition and Approach System) Behavioral Approach System Subscale Drive
+BAS_Fun	: (Behavioral Inhibition and Approach System) Behavioral Approach System Subscale Fun Seeking
+BAS_Reward	: (Behavioral Inhibition and Approach System) Behavioral Approach System Subscale Reward Responsiveness
+BIS	: (Behavioral Inhibition and Approach System) Behavioral Inhibition Score
+ERQ_reappraisal	: (Emotion Regulation Questionnaire) Reappraisal
+ERQ_suppression	: (Emotion Regulation Questionnaire) Suppression
+CERQ_SelfBlame	: (Cognitive Emotion Regulation Questionnaire) Self Blame
+CERQ_Acceptance	: (Cognitive Emotion Regulation Questionnaire) Acceptance
+CERQ_Rumination	: (Cognitive Emotion Regulation Questionnaire) Rumination
+CERQ_positiveRefocusing	: (Cognitive Emotion Regulation Questionnaire) Positive Refocusing
+CERQ_RefocusOnPlanning	: (Cognitive Emotion Regulation Questionnaire) Refocus On Planning
+CERQ_PositiveReappraisal	: (Cognitive Emotion Regulation Questionnaire) Positive Reappraisal
+CERQ_PuttingIntoPerspective	: (Cognitive Emotion Regulation Questionnaire) Putting Into Perspective
+CERQ_Catastrophizing	: (Cognitive Emotion Regulation Questionnaire) Catastrophizing
+CERQ_BlamingOthers	: (Cognitive Emotion Regulation Questionnaire) Blaming Others
+MARS_Behavioral_Distraction	: (Measure of Affect Regulation Style) Behavioral Distraction
+MARS_Cognitive_Distraction	: (Measure of Affect Regulation Style) Cognitive Distraction
+MARS_Situation_focused	: (Measure of Affect Regulation Style) Situation-focused Strategies
+MARS_Affect_focused	: (Measure of Affect Regulation Style) Affect-focused Strategies
+MARS_Disengagement	: (Measure of Affect Regulation Style) Disengagement
+MARS_Avoidance	: (Measure of Affect Regulation Style) Avoidance
+FSoZu_EU	: (Social Support Questionnaire) Emotional Support
+FSoZu_PU	: (Social Support Questionnaire) Practical support
+FSoZu_SI	: (Social Support Questionnaire) Social Integration
+FSoZu_Zuf	: (Social Support Questionnaire) Satisfaction with Social Support
+FSoZu_Vert	: (Social Support Questionnaire) Availability of Trusted Person
+MSPSS_SignificantOthers	: (Multidimensional Scale of Perceived Social Support) Significant Others
+MSPSS_Family	: (Multidimensional Scale of Perceived Social Support) Family
+MSPSS_Friends	: (Multidimensional Scale of Perceived Social Support) Friends
+MSPSS_total	: (Multidimensional Scale of Perceived Social Support) Total
+COPE_SelfDistraction	: (Coping Orientations to Problems Experienced (Brief COPE) Self Distraction
+COPE_UseOfEmotionalSupport	: (Coping Orientations to Problems Experienced (Brief COPE) Use Of Emotional Support
+COPE_BehavioralDisengagement	: (Coping Orientations to Problems Experienced (Brief COPE) Behavioral Disengagement
+COPE_positiveReframing	: (Coping Orientations to Problems Experienced (Brief COPE) Positive Reframing
+COPE_Humor	: (Coping Orientations to Problems Experienced (Brief COPE) Humor
+COPE_Alkohol_Drogen	: (Coping Orientations to Problems Experienced (Brief COPE) Substance Use
+COPE_UseOfInstrumentalSupport	: (Coping Orientations to Problems Experienced (Brief COPE) Use Of Instrumental Support
+COPE_Venting	: (Coping Orientations to Problems Experienced (Brief COPE) Venting
+COPE_Planning	: (Coping Orientations to Problems Experienced (Brief COPE) Planning
+COPE_Acceptance	: (Coping Orientations to Problems Experienced (Brief COPE) Acceptance
+COPE_SelfBlame	: (Coping Orientations to Problems Experienced (Brief COPE)Self Blame
+COPE_Religion	: (Coping Orientations to Problems Experienced (Brief COPE) Religion
+COPE_Denial	: (Coping Orientations to Problems Experienced (Brief COPE) Denial
+COPE_activeCoping	: (Coping Orientations to Problems Experienced (Brief COPE) Active Coping
+LOT_Optimism	: (Life-Orientation-Tests Revised) Optimism
+LOT_Pessimism	: (Life-Orientation-Tests Revised) Pessimism
+LOT_sumscore	: (Life-Orientation-Tests Revised) Overall Score
+PSQ_Worries	: (Perceived Stress Questionnaire (Short version) Worries
+PSQ_Tension	: (Perceived Stress Questionnaire (Short version)  Tension
+PSQ_Joy	: (Perceived Stress Questionnaire (Short version)  Joy
+PSQ_Demands	: (Perceived Stress Questionnaire (Short version) Demands 
+PSQ_OverallScore	: (Perceived Stress Questionnaire (Short version) OverallScore
+TICS_WorkOverload	: (Trierer Inventar zum Chronischen Stress) Work Overload
+TICS_SocialOverload	: (Trierer Inventar zum Chronischen Stress) Social Overload
+TICS_PressuereToPerform	: (Trierer Inventar zum Chronischen Stress) Pressuere To Perform
+TICS_WorkDiscontent	: (Trierer Inventar zum Chronischen Stress) Work Discontent
+TICS_WorkDemands	: (Trierer Inventar zum Chronischen Stress) Excessive Demands at Work
+TICS_LackSocialRecognition	: (Trierer Inventar zum Chronischen Stress) Lack Social Recognition
+TICS_SocialTension	: (Trierer Inventar zum Chronischen Stress) Social Tension
+TICS_SocialIsolation	: (Trierer Inventar zum Chronischen Stress) Social Isolation
+TICS_ChronicWorrying	: (Trierer Inventar zum Chronischen Stress) Chronic Worrying
+TICS_ScreeningScale	: (Trierer Inventar zum Chronischen Stress) Screening Scales
+FEV_KK	: (Eating Behaviour/ Fragebogen zum Essverhalten) Cognitive Restraint  of eating
+FEV_STOER	: (Eating Behaviour/ Fragebogen zum Essverhalten) Disinhibition of Eating
+FEV_HUNGER	: (Eating Behaviour/ Fragebogen zum Essverhalten) Susceptibility to Hunger  
+YFAS_control	: (Yale Food Addiction Scale) Substance taken in larger amount and for longer period than intended (criteria 1)
+YFAS_attempts	: (Yale Food Addiction Scale) Persistent desire or repeated unsuccessful attempt to quit (criteria 2).
+YFAS_time	: (Yale Food Addiction Scale) Much time/activity to obtain, use, recover (criteria 3).
+YFAS_activities	: (Yale Food Addiction Scale) Important social, occupational, or recreation activities given up or reduced (criteria 4).
+YFAS_problems	: (Yale Food Addiction Scale)  Use continues despite knowledge of adverse consequences (e.g., failure to fulfill role obligation, use when physically hazardous) (criteria 5).
+YFAS_tolerance	: (Yale Food Addiction Scale) Tolerance (marked increase in amount; marked decrease in effect)(criteria 6).
+YFAS_withdrawal	: (Yale Food Addiction Scale) Characteristic withdrawal symptoms; substance taken to relieve withdrawal (criteria 7).
+YFAS_impairment	: (Yale Food Addiction Scale) Use causes significant clinically impairment.
+YFAS_symptom_count	: (Yale Food Addiction Scale) continuous symptom/criterion count ranging from 0-7
+YFAS_diagnosis	: (Yale Food Addiction Scale) 0=no; 1=yes if 3 criteria and the clinically significant impairment criterion are met
+TeiQueSF_total	: (Trait Emotional Intelligence Questionnaire- Short Form) Global Trait Emotional Intelligence
+TeiQueSF_self_control	: (Trait Emotional Intelligence Questionnaire- Short Form) Self Control
+TeiQueSF_emotionality	: (Trait Emotional Intelligence Questionnaire- Short Form) Emotionality
+TeiQueSF_sociability	: (Trait Emotional Intelligence Questionnaire- Short Form) Sociability 
+TeiQueSF_well_being	: (Trait Emotional Intelligence Questionnaire- Short Form) Well-being
+STAI_Trait_Anxiety	: (State-Trait-Angstinventar) Trait Anxiety
+STAXI_State_Anger	: (State-Trait Anxiety Inventory) State_Anger
+STAXI_Trait_Anger	: (State-Trait Anxiety Inventory) Trait_Anger
+STAXI_TAT	: (State-Trait Anxiety Inventory) STAXI_TAT
+STAXI_TAR	: (State-Trait Anxiety Inventory) STAXI_TAR
+STAXI_AI	: (State-Trait Anxiety Inventory) Anger-In
+STAXI_AO	: (State-Trait Anxiety Inventory) Anger-Out
+STAXI_AC	: (State-Trait Anxiety Inventory) Anger-Control
+TAS_Identification	: (Toronto-Alexithymia Scale)  Difficulty with Identifying Feelings
+TAS_Describing	: (Toronto-Alexithymia Scale) Difficulty with Expressing and Describing Feelings
+TAS_ExternalThinking	: (Toronto-Alexithymia Scale) Externally-oriented Thinking
+TAS_OverallScore	: (Toronto-Alexithymia Scale) Overall Score
+Smoking_num_(Non-smoker=1, Occasional Smoker=2, Smoker=3)	
+SKID_Diagnoses	:Standardized Clinical Interview for DSM IV (SCID-I)
+Hamilton_Scale	: Hamilton Depression Scale 
+BSL23_sumscore	: Borderline Symptomatology
+AUDIT	        : Alcohol Use Disorder Identification Test
+Standard_Alcoholunits_Last_28days: : Alcohol Use for the last 28 days
+Alcohol_Dependence_In_1st-3rd_Degree_relative : Alcohol Dependence in 1st-3rd Degree relative	
+Relationship_Status : in relation 1=yes & 2=no 
+
+
+
+
+
+
+

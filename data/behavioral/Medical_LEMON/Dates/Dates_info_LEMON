@@ -1,0 +1,16 @@
+LEMON Dates
+
+The following file provides an overview of the dates of the datasets. 
+
+If in any case the blood drawing was not possible on the assessment day 1, it was acquired on the following assessment days. The new date is mentioned in this data file. Sometimes the date of the blood drawing for direct analysis varies from the date of the remaining blood samples which were stored at -80° C for later use, thus mentioned accordingly.
+
+
+Short description of each of the columns in this CSV file.
+
+ID	
+DAY.1_MRI: Assessment Day 1, when MRI, Cognition tests, as well as Medical checkup is accomplished (Blood sample, Anthropometry, Hair, Blood Pressure BP1 & BP2) is acquired. 	
+DAY.2_EGG: Assessment Day 2, when EEG, Emotion tests, as well as Assessment of Past and Present Psychiatric Symptoms (SCID, HAM_D, AUDIT, BLS)  is acquired. 	
+Follo-up:  follow up experiment day, when Blood Pressure BP3 is acquired. 	
+Date_Blood_Drawing_LabAnalysis: Date of Blood Drawing sent to the lab for direct analysis.	
+Date_Blood_Drawing_Freezer: Date of Blood Drawing for storing at -80° C for later use.
+

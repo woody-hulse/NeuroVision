@@ -1,0 +1,29 @@
+﻿PSQ
+Perceived Stress Questionnaire (Short version)
+
+References
+1. Levenstein, S., Prantera, C., Varvo, V., Scribano, M. L., Berto, E., Luzi, C., & Andreoli, A. (1993). Development of the Perceived Stress Questionnaire: a new tool for psychosomatic research. Journal of psychosomatic research, 37(1), 19-32.
+2. Fliege, H., Rose, M., Arck, P., Levenstein, S. & Klapp, B.F. (2001). Validierung des "Perceived Stress Questionnaire" (PSQ) an einer deutschen Stichprobe. Diagnostica, 47 (3), 142-152.
+
+
+Timeframe
+Last 2 years
+
+20 Items
+
+Response scores:
+from 1 (almost never) to 4 (usually).
+
+1 = fast nie
+2 = manchmal
+3 = häufig
+4 = meistens
+
+
+Subscales/Columns:
+PSQ_Worries: Worries	
+PSQ_Tension: Tension	
+PSQ_Joy: Joy	
+PSQ_Demands: Demands 	
+PSQ_OverallScore: OverallScore
+

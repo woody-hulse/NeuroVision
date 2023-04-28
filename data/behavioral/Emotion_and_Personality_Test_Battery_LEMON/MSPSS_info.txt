@@ -1,0 +1,31 @@
+﻿MSPSS
+Multidimensional Scale of Perceived Social Support
+
+References
+1. Zimet, G. D., Dahlem, N. W., Zimet, S. G., & Farley, G. K. (1988). The multidimensional scale of perceived social support. Journal of personality assessment, 52(1), 30-41.
+2. MSPSS – deutsche Version: Fragebogen zur Gesundheit und zum Wohlbefinden. (As used in the ABUEL Study 2010. http://www.diva-portal.org/smash/get/diva2:377016/FULLTEXT01.pdf)
+
+
+Timeframe:
+Trait
+
+12 Items
+
+Response scores:
+from 1 (not true at all) to 7 (very true).
+
+1 = stimmt überhaupt nicht
+2 = stimmt nicht
+3 = eher nicht
+4 = weder zutreffend noch unzutreffend
+5 = etwas zutreffend
+6 = zutreffend
+7 = sehr zutreffend
+
+
+Subscales/Columns:
+MSPSS_SignificantOthers: Significant Others	
+MSPSS_Family: Family		
+MSPSS_Friends: Friends	
+MSPSS_total
+

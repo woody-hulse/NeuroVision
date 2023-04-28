@@ -1,0 +1,41 @@
+﻿TAP-alertness
+Testbatterie zur Aufmerksamkeitsprüfung – reaction speed
+
+Reference:
+Zimmermann, P., Fimm, B. (2012): Testbatterie zur Aufmerksamkeitsprüfung Version 2.3.. Psychologische Testsysteme
+
+Task description:
+Participant has to press a button (as fast as possible) when a cross (visual stimuli) appears on screen.
+Two conditions (with or without audio signal before stimuli) existed.
+Four rounds, each containing 20 stimuli (1. and 4. without audio signal; 2. and 3. with audio signal).
+
+Before the beginning of the test a pretest was conducted.
+
+Reaction times in ms
+
+
+Column names in csv file:
+
+TAP_A_1 = reaction time medians for 1. round (no signal)
+TAP_A_2 = reaction time medians for 2. round (signal)
+TAP_A_3 = reaction time medians for 3. round (signal)
+TAP_A_4 = reaction time medians for 4. round (no signal)
+
+NO signal (aggregate scores)
+TAP_A_5 = mean reaction time (no signal)
+TAP_A_6 = median reaction time (no signal)
+TAP_A_7 = % (no signal)
+TAP_A_8 = standard deviations (no signal)
+TAP_A_9 = % (no signal)
+
+Signal (aggregate scores)
+TAP_A_10 = mean reaction time (signal)
+TAP_A_11 = median reaction time (signal)
+TAP_A_12 = % (signal)
+TAP_A_13 = standard deviations (signal)
+TAP_A_14 = % (signal)
+
+Phasic alertness
+TAP_A_15 = phasic alertness
+TAP_A_16 = % (phasic alertness)
+TAP_A_17 = comments

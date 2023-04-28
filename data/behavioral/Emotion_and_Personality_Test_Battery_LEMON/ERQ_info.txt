@@ -1,0 +1,32 @@
+﻿ERQ
+Emotion Regulation Questionnaire
+
+References
+1. Gross, J. J., & John, O. P. (2003). Individual differences in two emotion regulation processes: implications for affect, relationships, and well-being. Journal of personality and social psychology, 85(2), 348. doi: 10.1037/0022-3514.85.2.348
+2. Abler, B., & Kessler, H. (2009). Emotion Regulation Questionnaire - Eine deutsche Version des ERQ von Gross & John. Diagnostica, 55(3), 144-152. doi: 10.1026/0012-1924.55.3.144
+
+
+Timeframe
+Trait
+
+10 Items
+
+
+Answer Codes:
+from 1 (strongly disagree) to 7 (strongly agree). 
+
+1 = stimmt überhaupt nicht
+2
+3
+4 = neutral
+5
+6
+7 = stimmt vollkommen
+
+
+
+Subscales/Columns:	
+ERQ_reappraisal: Reappraisal		
+ERQ_suppression: Suppression
+
+

@@ -1,0 +1,35 @@
+﻿MARS
+Measure of Affect Regulation Style
+
+References:
+1. Larsen, R. J. & Prizmic, Z. (2004). Affect regulation. In: Baumeister, R. F. & Vohs, K. D. (Eds) Handbook of self-regulation: Research, theory, and applications. New York, Guilford Press, 40-61.
+
+
+
+Timeframe:
+Trait
+
+
+38 Items
+
+Response scores:
+from 0 (not at all) to 6 (almost always).
+
+0 = gar nicht
+1 = fast nie
+2 = manchmal
+3 = teilweise
+4 = oft
+5 = sehr oft
+6 = fast immer
+
+Subscales/Columns:	
+MARS_Behavioral_Distraction: Behavioral Distraction	
+MARS_Cognitive_Distraction: Cognitive Distraction	
+MARS_Situation_focused:	Situation-focused Strategies
+MARS_Affect_focused: Affect-focused Strategies	
+MARS_Disengagement: Disengagement	
+MARS_Avoidance: Avoidance
+
+
+

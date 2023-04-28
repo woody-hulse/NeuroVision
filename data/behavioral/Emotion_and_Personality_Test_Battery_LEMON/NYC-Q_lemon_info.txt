@@ -1,0 +1,70 @@
+NYC-Q_lemon
+New York Cognition Questionnaire
+
+
+Remarks:
+This questionnaire was recorded immediately after the MRI scan.
+
+
+Reference:
+Gorgolewski, K.J., Lurie, D., Urchs, S., Kipping, J.A.,  Craddock, R.C.,  Milham, M.P. , Margulies, D.S., Smallwood, J. (2014) A Correspondence between Individual Differences in the Brain's Intrinsic Functional Architecture and the Content and Form of Self-Generated Thoughts. PloS One, 9(5): e97176.  doi: 10.1371/journal.pone.0097176 
+
+http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0097176#s6
+
+
+Assessing:
+"… the content and form of an individual's experiences during the acquisition of resting-state fMRI data." (Gorgolewski et al., 2014)
+
+
+Link to the questionnaire:
+http://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0097176.s001
+
+
+
+
+Response scale:
+Nine-point Likert-scale (1 = "completely did not describe my thoughts" to 9 = "completely did describe my thoughts").
+
+
+
+Items:
+ 
+First section (items 1-23 → content of self-generated thoughts)
+
+1. I thought about things I am currently worried about
+2. I thought about people I have just recently met
+3. I thought of people I have known for a long time (friends)
+4. I thought about members of my family
+5. I thought about an event that took place earlier today
+6. I thought about an interaction I may possibly have in the future
+7. I thought about an interaction with some body that took place in the past
+8. I thought about something that happened at a place very close to me
+9. I thought about something that made me feel guilty
+10. I thought about an event that may take place later  today
+11. I thought about something that happened in the recent past (last couple of days but not today)
+12. I thought about something that happened a long time ago in the past
+13. I thought about something that made me angry
+14. I thought about something that made me happy
+15. I thought about something that made me cheerful
+16. I thought about something that made me calm
+17. I thought about something that made me sad
+18. I thought about something that is important to me
+19. I thought about something that could still happen today
+20. I thought about something that may take place in the distant future
+21. I thought about something that could take place in the near future (days or weeks but not today)
+22. I thought about personal worries
+23. I thought about something that happened in a place far away from where I am now
+
+
+Second section (items 24-31 → form of self-generated thoughts) 
+
+
+24. In the form of images:
+25. In the form of words:
+26. Like an inner monologue or audiobook:
+27. Like a television program or film:
+28. Had a strong and consistent personal narrative:
+29. Had a clear sense of purpose:
+30. Vague and non-specific:
+31. Fragmented and disjointed:
+

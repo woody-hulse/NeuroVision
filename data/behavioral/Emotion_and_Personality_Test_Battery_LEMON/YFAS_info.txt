@@ -1,0 +1,47 @@
+﻿YFAS
+Yale Food Addiction Scale
+
+References
+1. Gearhardt, A.N., Corbin, W.R., & Brownell, K.D. (2009). Preliminary validation of the Yale Food Addiction Scale. Appetite, 52, 430-436.
+2. Meule, A., Vögele, C., & Kübler, A. (2015). Deutsche Übersetzung und Validierung der Yale Food Addiction Scale. Diagnostica.
+
+In Round 1, participants 1-53 in items 17-24 have missing data.
+Participants 1-12 in items 21-27  have missing data.
+
+Timeframe
+Last 1 year
+
+
+
+Answer Codes
+Items 1-16
+0 = never
+1 = once per month
+2 = 2-4 per month
+3 = 2-3 per week
+4 = 4 per week or daily
+Items 17-24
+0 = never
+1 = yes
+Item 25
+1= 1 time, 2=2 times, 3=3 times, 4=4 times, 5=5 times or ofter
+Item 26: select all nutritions that you have a problem eating
+Item 27: (open) mention anything else which was not listed above that you have a problem eating
+
+
+
+Subscales/Columns:
+
+YFAS_control: Substance taken in larger amount and for longer period than intended (criteria 1)	
+YFAS_attempts: Persistent desire or repeated unsuccessful attempt to quit (criteria 2).	
+YFAS_time: Much time/activity to obtain, use, recover (criteria 3).		
+YFAS_activities:  Important social, occupational, or recreation activities given up or reduced (criteria 4).	
+YFAS_problems:   Use continues despite knowledge of adverse consequences (e.g., failure to fulfill role obligation, use when physically hazardous) (criteria 5).	
+YFAS_tolerance:  Tolerance (marked increase in amount; marked decrease in effect)(criteria 6).		
+YFAS_withdrawal: Characteristic withdrawal symptoms; substance taken to relieve withdrawal (criteria 7).	.	  
+YFAS_impairment: Use causes significant clinically impairment.	
+YFAS_symptom_count: continuous symptom/criterion count ranging from 0-7	
+YFAS_diagnosis: 0=no; 1=yes if 3 criteria and the clinically significant impairment criterion are met
+
+
+

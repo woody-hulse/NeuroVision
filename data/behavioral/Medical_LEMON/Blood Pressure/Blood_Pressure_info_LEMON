@@ -1,0 +1,22 @@
+Blood Pressure
+Seated Resting Blood Pressure
+
+Procedure
+Resting blood pressure (BP) was measured in *228 participants* using an automatic oscillometric blood pressure monitor (OMRON M500, OMR HEM-7213-D) and a 22–42 cm arm cuff (OMRON HEM-RML30, both OMRON Medizintechnik Handelsgesellschaft mbH, Mannheim, Germany) after a seated resting period of 5 min. The BP measurements took place on three occasions throughout the course of the study: 1) before the MRI session (BP1), 2) after the MRI session (BP2), 3) at the beginning of follow-up experiments (BP3). All BP measurements were recorded at the left arm. Before the MRI session, an additional measurement at the right arm was recorded to rule out pathologic differences between right and left arm measurements. Accompanying pulse measurements (Pulse1, Pulse2) were saved during BP measurements 1 and 2.
+
+As part of the complementary project by Mendes et al. (2018), one blood pressure measurement at the left arm was taken from *91 additional participants* before a rs-fMRI session.
+
+
+Items/columns
+1. ID: subject ID in BIDS format                
+2. BP1_left_systole: systolic blood pressure measured at left arm before MRI session
+3. BP1_left_diastole: diastolic blood pressure measured at left arm before MRI session 
+4. BP1_right_systole: systolic blood pressure measured at right arm before MRI session
+5. BP1_right_diastole: systolic blood pressure measured at right arm before MRI session
+6. pulse1_left: pulse measured at left arm before MRI session
+7. pulse1_right: pulse measured at right arm before MRI session
+8. BP2_left_systole: systolic blood pressure measured at left arm after MRI session
+9. BP2_left_diastole: diastolic blood pressure measured at left arm after MRI session
+10. pulse2_left: pulse measured at left arm after MRI session
+11. BP3_left_systole: systolic blood pressure measured at left arm during follow-up assessment
+12. BP3_left_diastole: diastolic blood pressure measured at left arm during follow-up assessment

@@ -1,0 +1,56 @@
+﻿TAP-incompatibility
+Testbatterie zur Aufmerksamkeitsprüfung - interference tendency
+
+Reference:
+Zimmermann, P., Fimm, B. (2012): Testbatterie zur Aufmerksamkeitsprüfung Version 2.3.. Psychologische Testsysteme
+
+Aim:
+Tests the interference tendency by stimulus-reaction incompatibility (Simon-Effect)
+
+Task description:
+An arrow appears on the left or the right side of the screen (there is an audio signal before each stimulus).
+
+Participant has to press, as fast as possible, the left or the right button according to the direction of the arrow (NOT according to side of appearance). The right button is in the right hand of the participant and the left one on the left hand of the participant.
+
+Compatible and incompatible stimuli (each 30 stimuli).
+
+Reaction times in ms.
+
+
+Column names in the csv file:
+
+Compatible stimuli
+TAP_I_1 = mean time for compatible stimuli
+TAP_I_2 = median time for compatible stimuli
+TAP_I_3 = %
+TAP_I_4 = standard deviations
+TAP_I_5 = %
+TAP_I_6 = how many errors did participant make during compatible stimuli presentation
+TAP_I_7 = %
+
+Incompatible stimuli
+TAP_I_8 = mean time for incompatible stimuli
+TAP_I_9 = median time for incompatible stimuli
+TAP_I_10 = %
+TAP_I_11 = standard deviations
+TAP_I_12 = %
+TAP_I_13 = how many errors did participant make during incompatible stimuli presentation
+TAP_I_14 = %
+
+Whole stimuli
+TAP_I_15 = mean time for whole stimuli presentation
+TAP_I_16 = median time for whole stimuli presentation
+TAP_I_17 = %
+TAP_I_18 = standard deviations
+TAP_I_19 = %
+TAP_I_20 = how many errors did participant make during whole stimuli presentation
+TAP_I_21 = %
+
+F-values
+TAP_I_22 = F-value_visual_field
+TAP_I_23 = %
+TAP_I_24 = F-value_hand
+TAP_I_25 = %
+TAP_I_26 = F-value_visual_field_x_hand
+TAP_I_27 = %
+TAP_I_28 = comments

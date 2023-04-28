@@ -1,0 +1,30 @@
+﻿STAI-G-X2
+State-Trait-Angstinventar (STAI) - Trait-Angstskala
+
+References:
+1. Spielberger, C. D. (1989). State-Trait Anxiety Inventory: Bibliography (2nd ed.). Palo Alto, CA: Consulting Psychologists Press.
+2. Laux, L., Glanzmann, P., Schaffner, P. & Spielberger, C.D. (1981). Das State-Trait-Angstinventar. Weinheim: Beltz Test GmbH.
+3. Spielberger, C. D., Gorsuch, R. L., Luschene, R. E. (1970). Manual for the State-Trait Anxiety Inventory. Manual for the State-Trait Anxiety Inventory. Palo Alto, CA: Consulting Psychologists Press.
+
+Timeframe:
+Trait
+
+
+20 Items: 
+(Items 21-40)
+
+Trait- Anxiety (Form X2): 
+21, 26, 27, 30, 33, 36, 39.
+
+Response scores:
+from 1 (almost never) to 4 (almost always)
+
+1 = FAST NIE
+2 = MANCHMAL
+3 = OFT
+4 = FAST IMMER
+
+Subscales/columns:
+STAI_Trait_Anxiety: Trait Anxiety
+
+

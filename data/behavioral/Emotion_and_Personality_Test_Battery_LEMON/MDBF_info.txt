@@ -1,0 +1,35 @@
+﻿MDBF
+Mehrdimensionale Befindlichkeitsfragebogen (original in German)
+Multidimensional Mood State Questionnaire (MDMQ)
+References
+"1. Steyer, R., Schwenkmezger, P., Notz, P., Eid, M.  (1997). Der Mehrdimensionale 
+Befindlichkeitsfragebogen. Göttingen: Hogrefe."
+
+
+
+NOTE:
+This questionnaire data is acquired on each assessment day. (Day 1, day 2, and Follow-up day 3) 
+
+Timeframe:
+State (augenblicklich / im Moment)
+
+24 Items
+
+
+Response scores:
+from 1 (not at all) to 5 (very much). 
+
+1 = überhaupt nicht
+2
+3
+4
+5 = sehr
+
+
+
+Subscales/Columns:
+MDBF_Day1_GS_Scale: Good-Bad	
+MDBF_Day1_WM_Scale: Awake-Tired	
+MDBF_Day1_RU_Scale: Calm-Nervous
+
+

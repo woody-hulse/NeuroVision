@@ -1,0 +1,42 @@
+﻿COPE
+Coping Orientations to Problems Experienced (Brief COPE)
+
+References
+1. Knoll, N., Rieckmann, N., & Schwarzer, R. (2005). Coping as a mediator between personality and stress outcomes: A longitudinal study with cataract surgery patients. European Journal of Personality, 19, 229-247. doi: 10.1002/per.546
+2. Carver, C. S.  (1997).  You want to measure coping but your protocol’s too long:  Consider the Brief COPE. International Journal of Behavioral Medicine, 4, 92-100. 
+
+
+
+Timeframe:
+Trait (in vergangene unangenehmen oder schwierigen Situation)
+
+
+28 Items
+
+
+Response scales:
+from 1 (not at all) to 4 (very much). 
+
+1 = überhaupt nicht
+2 = ein bißchen
+3 = ziemlich
+4 = sehr
+
+Subscales/Columns:
+COPE_SelfDistraction: Self Distraction	
+COPE_UseOfEmotionalSupport: Use Of Emotional Support	
+COPE_BehavioralDisengagement: Behavioral Disengagement	
+COPE_positiveReframing: Positive Reframing	
+COPE_Humor: Humor	
+COPE_Alkohol‎_Drogen: Substance Use	
+COPE_UseOfInstrumentalSupport: Use Of Instrumental Support	
+COPE_Venting: Venting	
+COPE_Planning: Planning	
+COPE_Acceptance: Acceptance	
+COPE_SelfBlame: Self Blame	
+COPE_Religion: Religion	
+COPE_Denial: Denial	
+COPE_activeCoping: Active Coping
+
+
+

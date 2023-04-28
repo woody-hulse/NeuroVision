@@ -1,0 +1,30 @@
+﻿LOT-R
+Life-Orientation-Tests Revised
+
+References
+1. Scheier, M. F., Carver, C. S., & Bridges, M. W. (1994). Distinguishing optimism from neuroticism (and trait anxiety, self-mastery, and self-esteem): A re-evaluation of the Life Orientation Test. Journal of Personality and Social Psychology, 67, 1063-1078.
+2. Glaesmer, H., Hoyer, J., Klotsche, J. & Herzberg, P.Y. (2008). Die Deutsche Version des Life-Orientation-Tests (LOT-R) zum dispositionellen Optimismus und Pessimismus. Zeitschrift für Gesundheitspsychologie, 16 (1), 26-31. doi: 10.1026/0943-8149.16.1.26
+
+
+Timeframe:
+Trait
+
+10 Items
+
+
+Response scores:
+from 0 (does not apply at all) to 4 (strongly applies). 
+
+4 = trifft ausgesprochen zu
+3 = trifft etwas zu
+2 = teils/teils
+1 = trifft kaum zu
+0 = trifft überhaupt nicht zu
+
+Subscales/Columns:
+LOT_Optimism: Optimism	
+LOT_Pessimism: Pessimism	
+LOT_sumscore: Overall Score
+
+
+

@@ -1,0 +1,19 @@
+LPS
+LPS-2 subtest 3
+Leistungsprüfsystem 2 – logical deductive thinking
+Questionnaire A, subtest 3 (part of Gf: fluid intelligence)
+
+Reference:
+Kreuzpointner, L., Lukesch, H., Horn, W. (2013) Leistungsprüfsystem 2. Hogrefe Verlag GmbH & Co. KG
+
+Aim:
+Assess logical deductive thinking.
+
+Task description:
+40 rows with 8 symbols each were presented.
+Participants had to identify, in each of the rows, the one symbol which did not fit.
+Time limit for the task (40 raws): 3 min.
+
+Column names in the csv file:
+LPS_1 = LPS raw data, how many symbol-rows did the participant process correctly
+LPS_2 = comments

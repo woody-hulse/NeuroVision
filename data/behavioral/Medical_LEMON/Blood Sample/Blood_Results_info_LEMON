@@ -1,0 +1,135 @@
+Blood Sample
+
+Procedure
+A blood sample of approximately 70 ml in total was taken on the first day after the acquisition of the MRI data. The blood was collected with four different types of sampling tubes: Serum, EDTA, Citrate and RNA. A part of the sample was directly sent on the day of drawing to the Institute for Laboratory Medicine, Clinical Chemistry and Molecular Diagnostics (ILM) of Medical Faculty at the Leipzig University, the remaining samples were stored for later use. One serum tube (S-Monovette® 7.5 ml, Sarstedt), one EDTA tube  (S-Monovette® 2.7 ml K3E, Sarstedt), and one citrate tube (S-Monovette® 3.0 ml 9NC, Sarstedt) were sent for direct analysis to the ILM. The remaining blood samples were divided into 10 microtainers of 2,0 ml size. Together with three EDTA tubes  (S-Monovette® 2.7 ml K3E, Sarstedt) and 2 RNA tubes (TempusTM , Applied Biosystems ) - containing  stabilization solution - the remaining blood samples were stored at -80° C for later use.
+The date of blood drawing is mentioned at the beginning (Assessment Day 1, or Day 1+x days, in case it was taken at another day).
+
+
+Parameters measured in EDTA tubes:
+
+HB Hemoglobin For Hemoglobin A1c in (g/dl)
+HBA1C Hemoglobin A1c in (%)
+HBA1CI Hemoglobin A1c, IFCC full blood in (mmol/mol)
+HBA1G Hemoglobin A1c amount in (g/dl)
+
+Blood Count: 
+
+HCT Hematocrit in (l/l)
+HGB Hemoglobin in (mmol/l)
+HGBK Hemoglobin (conventional) in (g/dl)
+MCH Mean Corpuscular Haemoglobin (fmol)
+MCHC Mean Corpuscular Haemoglobin Concentration in (mmol/l)
+MCHCK Mean Corpuscular Haemoglobin Concentration (conventional) in (g/dl)
+MCHK Mean Corpuscular Haemoglobin (conventional) in (pg)
+MCV Mean Corpuscular Volume in (fl)
+MPV Mean Platelet Volume in (fl)
+PLT Platelets in (exp 9 /l)
+RBC	Red Blood Cells in (exp 12/l)
+RDW Red Cell Distribution Width in (%)
+WBC White Blood Cells in (exp 9/l)
+
+
+Parameters measured in Serum tubes:
+
+ALAT Alanine Aminotransferase  in (µkat/l)
+ASAT Aspartate Aminotransferase in (µkat/l)
+CHOL Cholesterol in (mmol/l)
+CL Chloride in (mmol/l)
+CRE Creatinine in (µmol/l)
+CRP C-Reactive Protein in (mg/l)
+GGT Gamma Glutamyl Transferase in (µkat/l)
+GLU Glucose in (mmol/l)
+HDLC HDL-Cholesterol in (mmol/l
+HDLC Reference Range 
+INDH Hemolytic Index 	
+INDI Icteric Index 	
+INDL Lipemic Index
+K Potassium in (mmol/l)
+LDLC LDL-Cholesterol in (mmol/l)
+NA Sodium in (mmol/l)
+TRIG Triglycerides in (mmol/l)
+TSH Thyroid-Stimulating Hormone in (mU/l
+
+
+Parameters measured in Citrate tubes:
+
+INR International Normalized Ratio of Prothrombin Time of Blood Coagulation
+PT Prothrombin Time in (%)
+PTR Prothrombin Time Ratio
+PTS Prothrombin Time in seconds (sec)
+
+
+COLUMN NAMES:
+01. ID
+02: Date_Blood_Drawing_LabAnalysis
+03. ALAT Alanine Aminotransferase  in (µkat/l) 
+04. ALAT Reference range
+05. ASAT Aspartate Aminotransferase in (µkat/l)
+06. ASAT Reference range 	
+07. HCT Hematocrit in (l/l)
+08. HCT Reference range	
+09. HGB Hemoglobin in (mmol/l)
+10. HGB Reference range	
+11. HGBK Hemoglobin (conventional) in (g/dl)
+12. HGBK Reference range	
+13. MCH Mean Corpuscular Haemoglobin (fmol)
+14. MCHC Mean Corpuscular Haemoglobin Concentration in (mmol/l)
+15. MCHC Reference range	
+16. MCHCK Mean Corpuscular Haemoglobin Concentration (conventional) in (g/dl)
+17. MCHCK Reference range
+18. MCHK Mean Corpuscular Haemoglobin (conventional) in (pg)
+19. MCHK Reference range
+20. MCV Mean Corpuscular Volume in (fl)
+21. MCV Reference range
+22. MPV Mean Platelet Volume in (fl)
+23. MPV Reference range
+24. PLT Platelets in (exp 9 /l)
+25. PLT Reference range
+26. RBC	Red Blood Cells in (exp 12/l)
+27. RBC Reference range
+28. RDW Red Cell Distribution Width in (%)
+29. RDW Reference range
+30. WBC White Blood Cells in (exp 9/l)
+31. WBC Reference range
+32. CHOL Cholesterol in (mmol/l)
+33. CHOL Reference range
+34. CKDEPI Chronic Kidney Disease Epidemiology Collaboration in (ml/min/1.73m)
+35. CKDEPI Reference range 	
+36. CL Chloride in (mmol/l)
+37. CL Reference Range
+38. CRE Creatinine in (µmol/l)
+39. CRE Reference Range
+40. CRP C-Reactive Protein in (mg/l)
+41. CRP Reference Range
+42. GGT Gamma Glutamyl Transferase in (µkat/l)
+43. GGT Reference Range
+44. GLU Glucose in (mmol/l)
+45. GLU Reference Range
+46. HB Hemoglobin For Hemoglobin A1c in (g/dl)
+47. HBA1C Hemoglobin A1c in (%)
+48. HBA1C Reference Range
+49. HBA1CI Hemoglobin A1c, IFCC full blood in (mmol/mol)
+50. HBA1CI Reference Range
+51. HBA1G Hemoglobin A1c amount in (g/dl)
+52. HDLC HDL-Cholesterol in (mmol/l)
+53. HDLC Reference Range 
+54. INDH Hemolytic Index 	
+55. INDI Icteric Index 	
+56. INDL Lipemic Index
+57. INR International Normalized Ratio of Prothrombin Time of Blood Coagulation
+58. INRVOR International normalized ratio of prothrombin time of blood coagulation (from device) 	
+59. K Potassium in (mmol/l)
+60. K Reference Range	
+61. LDLC LDL-Cholesterol in (mmol/l)
+62. LDLC Reference Range
+63. NA Sodium in (mmol/l)
+64. NA Reference Range
+65. PT Prothrombin Time in (%)
+66. PT Reference Range
+67. PTR Prothrombin Time Ratio
+68. PTS Prothrombin Time in seconds (sec)
+69. TRIG Triglycerides in (mmol/l)
+70. TRIG Reference Range
+71. TSH Thyroid-Stimulating Hormone in (mU/l)
+72. TSH Reference Range
+

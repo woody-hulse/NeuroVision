@@ -1,0 +1,33 @@
+﻿NEO-FFI
+NEO-Fünf_Faktoren Inventar
+Big-Five of Personality (NEO-FFI)
+
+References:
+1. Costa, P.T. & McCrae, R.R. (1989). NEO PI/FFI manual supplement for use with the NEO Personality Inventory and the NEO Five-Factor Inventory. Odessa, Fl.: Psychological Assessment Resources.; Costa, P.T. & McCrae, R.R. (1992). Revised NEO Personality Inventory (NEO PI-R) and NEO Five Factor Inventory (NEO-FFI). Odessa, Fl.: Psychological Assessment Resources.
+2. P. Borkenau & F. Ostendorf: NEO-Fünf-Faktoren Inventar nach Costa und McCrae (NEO-FFI). Manual (2. Aufl.). Göttingen: Hogrefe, 2008.
+
+
+Timeframe:
+Trait
+
+
+60 Items
+
+Response scores:
+from 0 (strong denial) to 4 (strong approval).
+
+0 = Starke Ablehnung
+1 = Ablehnung
+2 = Neutral
+3 = Zustimmung
+4 = Starke Zustimmung
+
+
+Subscales/Columns:	
+NEOFFI_Neuroticism: Neuroticism	
+NEOFFI_Extraversion: Extraversion	
+NEOFFI_OpennessForExperiences: Openness For Experiences	
+NEOFFI_Agreeableness: Agreeableness	
+NEOFFI_Conscientiousness: Conscientiousness
+
+

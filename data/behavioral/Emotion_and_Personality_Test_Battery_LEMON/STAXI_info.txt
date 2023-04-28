@@ -1,0 +1,42 @@
+﻿STAXI
+State-Trait-Ärgerausdrucks-Inventar
+State-Trait Anxiety Inventory (STAI-G-X2)
+
+References
+1. Spielberger, C. D. (1988). State-Trait Anger Expression Inventory (STAXI).Research edition. Odessa, FL: Psychological Assessment Resources.
+2. Schwenkmezger, P., Hodapp, V. & Spielberger, C. D. (1992). Das State-Trait-Ärgerausdrucks-Inventar STAXI. Bern: Huber.
+
+
+Timeframe
+Teil 1: State | Teil 2: Trait | Teil 3: Trait
+
+
+
+44 Items
+
+Response scores:
+from 1 (not at all) to 4 (very much) 
+or 
+from 1 (hardly ever) to 4 (nearly always).
+
+Teil 1: (Items 1-10)
+1 = Überhaupt nicht
+2 = ein wenig
+3 = ziemlich
+4 = sehr
+Teil 2 (Items 11-20) & Teil 3 (Items 21-44)
+1 = fast nie
+2 = manchmal
+3 = oft
+4 = fast immer
+
+
+
+Subscales/Columns:
+State_Anger	
+Trait_Anger	
+STAXI_TAT	
+STAXI_TAR: 	
+STAXI_AI: Anger-In	
+STAXI_AO: Anger-Out	
+STAXI_AC: Anger-Control

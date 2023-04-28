@@ -1,0 +1,23 @@
+﻿WST
+Wortschatztest – vocabulary
+
+Reference: 
+Schmidt, K.-H., Metzler, P. (1992): Wortschatztest (WST). Beltz Test GmbH
+
+task:
+total of 42 word sets with each one real/target word and five distractors/pseudo words
+participant has to identify the one target word 
+NO time limit
+
+z-scale (M=0, s=1)
+IQ-scale (M=100, s=15)
+Z-scale (M=100, s=10)
+
+
+column names:
+
+WST_1 = WST raw data; how many real words did the pp. recognize correctly
+WST_2 = z-scale
+WST_3 = IQ-scale
+WST_4 = Z-scale
+WST_5 = comments

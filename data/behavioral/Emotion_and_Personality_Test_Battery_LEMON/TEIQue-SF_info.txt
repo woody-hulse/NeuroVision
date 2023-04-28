@@ -1,0 +1,36 @@
+﻿TEIQue-SF
+Trait Emotional Intelligence Questionnaire- Short Form
+
+References
+1. Petrides, K. V. & Furnham, A. (2006). The role of trait emotional intelligence in a gender-specific model of organizational variables. Journal of Applied Social Psychology, 36, 552-569.
+2. Jacobs, I., Sim, C. W., & Zimmermann, J. (2015). The German TEIQue-SF: Factorial structure and relations to agentic and communal traits and mental health. Personality and Individual Differences, 72, 189-194.
+"3. Petrides, K. V. (2009). Technical manual for the Trait Emotional Intelligence
+Questionnaires (TEIQue). London: London Psychometric Laboratory. "
+
+Timeframe;
+Trait
+
+
+30 Items
+
+
+Response scores:
+from 1 (do not agree at all) to 7 (agree completely). 
+
+1 = Stimmt absolut NICHT zu
+2
+3
+4
+5
+6
+7 = Stimme absolut zu
+
+
+
+
+Subscales/Columns:
+TeiQueSF_total: Global Trait Emotional Intelligence	
+TeiQueSF_self_control: Self Control	
+TeiQueSF_emotionality: Emotionality		
+TeiQueSF_sociability: Sociability 	
+TeiQueSF_well_being: Well-being

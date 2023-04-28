@@ -1,0 +1,31 @@
+﻿TAS
+Toronto-Alexithymie-Skala-26
+
+References
+1. Bagby, R. M., Parker, J. D., & Taylor, G. J. (1994). The twenty-item Toronto Alexithymia Scale—I. Item selection and cross-validation of the factor structure. Journal of psychosomatic research, 38(1), 23-32.
+2. Kupfer, J., Brosig, B. & Brähler, E. (2001). Toronto-Alexithymie-Skala-26. Deutsche Version (TAS-26). Göttingen: Hogrefe.
+
+
+Timeframe
+Trait
+
+26 Items
+
+Response scale: 
+from 1 (does not apply at all) to 5 (applies completely).
+
+
+1 = trifft gar nicht zu
+2 = trifft eher nicht zu
+3 = teils/teils
+4 = trifft eher zu
+5 = trifft völlig zu
+
+
+Subsales/Solumns:
+TAS_Identification: Difficulty with Identifying Feelings
+TAS_Describing: Difficulty with Expressing and Describing Feelings	
+TAS_ExternalThinking: Externally-oriented Thinking
+TAS_OverallScore: Overall Score
+
+ 

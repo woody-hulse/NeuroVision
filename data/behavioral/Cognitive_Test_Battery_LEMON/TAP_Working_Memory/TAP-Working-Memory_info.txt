@@ -1,0 +1,32 @@
+TAP- working memory
+Testbatterie zur Aufmerksamkeitsprüfung
+
+Reference:
+Zimmermann, P., Fimm, B. (2012): Testbatterie zur Aufmerksamkeitsprüfung Version 2.3.. Psychologische Testsysteme
+
+
+Aim:
+Assess working memory capacity.
+
+Task description:
+Numbers from 1-9 appear on screen (serially)
+Participant has to press a button (as fast as possible) when the number on screen is equal to the second last number.
+
+Before the beginning of the test a pretest was conducted.
+
+Reaction times in ms.
+
+
+Column names in the csv file:
+﻿TAP_WM_1 = mean reaction time for correct pressed bottoms (correct answers)
+﻿TAP_WM_2 = reaction time median
+﻿TAP_WM_3 = %
+﻿TAP_WM_4 = standard deviations
+﻿TAP_WM_5 = %
+﻿TAP_WM_6 = how many correct matches
+﻿TAP_WM_7 = how many incorrect matches (errors)
+﻿TAP_WM_8 = %
+﻿TAP_WM_9 = how many missed matches (omissions)
+﻿TAP_WM_10 = %
+﻿TAP_WM_11 = outliers
+﻿TAP_WM_12 = comments

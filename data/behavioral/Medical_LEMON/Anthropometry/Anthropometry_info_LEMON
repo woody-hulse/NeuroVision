@@ -1,0 +1,12 @@
+Anthropometry
+
+Classical anthropometric measurements were taken according to standardized procedures by trained medical persons. Body weight of dressed participant was measured with an electronic scale (SECA 813,  Seca Gmbh & Co KG) with a precision of 0.01 kg. The body height was measured by a stadiometer (SECA 216) to the nearest 0.1 cm. The waist and hip were assessed by using an ergonometric circumference measuring tape (SECA 201) to the nearest 0.1cm.   
+All the measure are taken on Day 1 (MRI scan day).
+
+	
+Items
+1. Height_cm	
+2. Weight_kg	
+3. Waist_cm	
+4. Hip_cm
+

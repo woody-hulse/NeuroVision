@@ -1,0 +1,32 @@
+Availability Table of LEMON Data
+Follow-up experiments of LEMON participants
+(also participating in Mendes et al 2017. )
+
+
+In addition to the meta file, we include a data availability (.csv) file which includes all the LEMON data available for each specific data acquisition section with subscales (1=available, 0=not available).   
+
+Abbreviations/Items names
+
+MDBF_Day3_GS_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 1) Good-Bad
+MDBF_Day3_WM_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 1) Awake-Tired
+MDBF_Day3_RU_Scale	: (Multidimensional Mood State Questionnaire MDBF Day 1) Calm-Nervous
+FTP_SUM	: (Future Time Perspective Questionnaire) Sum Score
+BP3_left_systole	: (Seated Resting Blood Pressure) systolic blood pressure measured at left arm during follow-up assessment
+BP3_left_diastole	: (Seated Resting Blood Pressure) diastolic blood pressure measured at left arm during follow-up assessment
+ses2_AP-run-01-lemon_ecg	: ECG of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 1 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-01-lemon_ecg	: ECG of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 2 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-02-lemon_ecg	: ECG of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 3 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-02-lemon_ecg	: ECG of  LEMON participants also participating in follow-up study by Mendes et al  2017; (rs-fMRI 4 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-01-lemon_bpp	: Blood pressure (BPP = diastolic DBP + systolic SBP) of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 1 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-01-lemon_bpp	: Blood pressure (BPP = diastolic DBP + systolic SBP) of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 2 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-02-lemon_bpp	: Blood pressure (BPP = diastolic DBP + systolic SBP) of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 3 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-02-lemon_bpp	: Blood pressure (BPP = diastolic DBP + systolic SBP) of  LEMON participants also participating in follow-up study by Mendes et al  2017; (rs-fMRI 4 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-01-lemon_ppg	: Pulse of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 1 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-01-lemon_ppg	: Pulse of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 2 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-02-lemon_ppg	: Pulse of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 3 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-02-lemon_ppg	: Pulse of  LEMON participants also participating in follow-up study by Mendes et al  2017; (rs-fMRI 4 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-01-lemon_resp	: Respiration of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 1 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-01-lemon_resp	: Respiration of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 2 with posterior>>anterior phase encoding acquisition)
+ses2_AP-run-02-lemon_resp	: Respiration  of  LEMON participants also participating in follow-up study by Mendes et al  2017;  (rs-fMRI 3 with anterior>>posterior phase encoding acquisition)
+ses2_PA-run-02-lemon_resp	: Respiration  of  LEMON participants also participating in follow-up study by Mendes et al  2017; (rs-fMRI 4 with posterior>>anterior phase encoding acquisition)
+
