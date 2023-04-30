@@ -27,102 +27,102 @@ VGG_DIR = "mri_vgg/"
 
 
 def applyACS(mri_data, patientIDs, save=True, path="../data/mri_acs/", downsampling_factor=2):
-	"""
-	acs preprocesses mri data
-	mri_data		: input of shape (num_patients, res, res, res)
-	patientIDs		: list of patientIDs
-	return			: acs data of shape (num_patients, res, res, 3)
-	"""
+    """
+    acs preprocesses mri data
+    mri_data		: input of shape (num_patients, res, res, res)
+    patientIDs		: list of patientIDs
+    return			: acs data of shape (num_patients, res, res, 3)
+    """
 
-	print("computing ACS (axial-coronal-sagaittal) data")
+    print("computing ACS (axial-coronal-sagaittal) data")
 
-	num_patients, resX, resY, resZ = mri_data.shape
-	resX = int(resX / downsampling_factor)
-	resY = int(resY / downsampling_factor)
-	output = np.empty((num_patients, resX * resY, resZ, 3))
+    num_patients, resX, resY, resZ = mri_data.shape
+    resX = int(resX / downsampling_factor)
+    resY = int(resY / downsampling_factor)
+    output = np.empty((num_patients, resX * resY, resZ, 3))
 
-	for patient in tqdm(range(num_patients)):
-		for i, x in enumerate(range(0, resX, downsampling_factor)):
-			for j, y in enumerate(range(0, resY, downsampling_factor)):
-				output[patient][i*resX + j, :, 0] = mri_data[patient, x, y, :]
-				output[patient][i*resX + j, :, 1] = mri_data[patient, :, x, y]
-				output[patient][i*resX + j, :, 2] = mri_data[patient, x, :, y]
+    for patient in tqdm(range(num_patients)):
+        for i, x in enumerate(range(0, resX, downsampling_factor)):
+            for j, y in enumerate(range(0, resY, downsampling_factor)):
+                output[patient][i*resX + j, :, 0] = mri_data[patient, x, y, :]
+                output[patient][i*resX + j, :, 1] = mri_data[patient, :, x, y]
+                output[patient][i*resX + j, :, 2] = mri_data[patient, x, :, y]
 
-	if save:
-		print("saving ACS output to", path, "...")
-		if not os.path.exists(path):
-			os.mkdir(path)
-		with tqdm(total=len(patientIDs)) as pbar:
-			for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
-				np.save(path + patientID, patient_output)
-				pbar.update(1)
+    if save:
+        print("saving ACS output to", path, "...")
+        if not os.path.exists(path):
+            os.mkdir(path)
+        with tqdm(total=len(patientIDs)) as pbar:
+            for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
+                np.save(path + patientID, patient_output)
+                pbar.update(1)
 
-	return output
+    return output
 
 
 def applyVGG(mri_data, patientIDs, downsampling_factor=2, save=True, path="../data/mri_vgg/"):
-	"""
-	applies pretrained vgg to input
-	mri_data		: input of shape (num_patients, res, res, res, 3)
-	patientIDs		: list of patientIDs
-	"""
+    """
+    applies pretrained vgg to input
+    mri_data		: input of shape (num_patients, res, res, res, 3)
+    patientIDs		: list of patientIDs
+    """
 
-	inputX = tf.transpose(mri_data, [1, 0, 2, 3, 4])
-	inputY = tf.transpose(mri_data, [3, 0, 1, 2, 4])
-	inputZ = tf.transpose(mri_data, [2, 0, 3, 1, 4])
+    inputX = tf.transpose(mri_data, [1, 0, 2, 3, 4])
+    inputY = tf.transpose(mri_data, [3, 0, 1, 2, 4])
+    inputZ = tf.transpose(mri_data, [2, 0, 3, 1, 4])
 
-	print("collecting VGG data ...")
+    print("collecting VGG data ...")
 
-	vgg = tf.keras.applications.VGG19(
-			include_top=False,
-			weights="imagenet",
-			input_tensor=None,
-			input_shape=mri_data.shape[2:],
-			pooling=None,
-		)
-	
-	print("passing MRI data through VGG ...")
+    vgg = tf.keras.applications.VGG19(
+            include_top=False,
+            weights="imagenet",
+            input_tensor=None,
+            input_shape=mri_data.shape[2:],
+            pooling=None,
+        )
+    
+    print("passing MRI data through VGG ...")
 
-	outputX, outputY, outputZ = [], [], []
-	for i in tqdm(range(0, inputX.shape[0], downsampling_factor)):
-		outputX.append(vgg(inputX[i]))
-		outputY.append(vgg(inputY[i]))
-		outputZ.append(vgg(inputZ[i]))
-	outputX = tf.stack(outputX)
-	outputY = tf.stack(outputY)
-	outputZ = tf.stack(outputZ)
+    outputX, outputY, outputZ = [], [], []
+    for i in tqdm(range(0, inputX.shape[0], downsampling_factor)):
+        outputX.append(vgg(inputX[i]))
+        outputY.append(vgg(inputY[i]))
+        outputZ.append(vgg(inputZ[i]))
+    outputX = tf.stack(outputX)
+    outputY = tf.stack(outputY)
+    outputZ = tf.stack(outputZ)
 
-	output = tf.concat([outputX, outputY, outputZ], axis=0)
-	output = tf.transpose(output, [1, 0, 2, 3, 4])
+    output = tf.concat([outputX, outputY, outputZ], axis=0)
+    output = tf.transpose(output, [1, 0, 2, 3, 4])
 
-	if save:
-		print("saving VGG output to", path, "...")
-		with tqdm(total=len(patientIDs)) as pbar:
-			for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
-				np.save(path + patientID, patient_output)
-				pbar.update(1)
+    if save:
+        print("saving VGG output to", path, "...")
+        with tqdm(total=len(patientIDs)) as pbar:
+            for patientID, patient_output in zip(patientIDs, tf.unstack(output)):
+                np.save(path + patientID, patient_output)
+                pbar.update(1)
 
-	return output
+    return output
 
 
 def load_preprocessing(path="../data/mri_vgg/"):
-	"""
-	loads saved data
-	"""
-	patientIDs = os.listdir(path)
-	if ".DS_Store" in patientIDs:
-		patientIDs.remove(".DS_Store")
+    """
+    loads saved data
+    """
+    patientIDs = os.listdir(path)
+    if ".DS_Store" in patientIDs:
+        patientIDs.remove(".DS_Store")
 
-	print("loading data from", path, "...")
+    print("loading data from", path, "...")
 
-	data = []
-	for patientID in tqdm(patientIDs):
-		data.append(np.load(path + patientID))
-	data = np.stack(data)
+    data = []
+    for patientID in tqdm(patientIDs):
+        data.append(np.load(path + patientID))
+    data = np.stack(data)
 
-	patientIDs = [patientID.replace(".npy", "") for patientID in patientIDs]
+    patientIDs = [patientID.replace(".npy", "") for patientID in patientIDs]
 
-	return patientIDs, data
+    return patientIDs, data
 
 
 def train_test_split(data, prop=0.7):
@@ -257,6 +257,57 @@ def compress_preprocessed_EEG(filepath, patientID, num_channels=60, timesteps=10
     np.save(filepath + "../" + EEG_RESULT_DIR + patientID + ".npy", data)
 
 
+BEHAVIORAL_TESTS = ["cvlt", "lps", "rwt", "tap-alertness", "tap-incompatibility", "tap-working", "tmt", "wst", "bisbas",
+                    "cerq", "cope", "f-sozu", "fev", "lot-r", "mspss", "neo-ffi", "psq", "tas", "teique", "upps"]
+
+BEHAVIORAL_COLUMNS = {
+    "cvlt"                  : [4, 10, 11, 13],
+    "lps"                   : [1],
+    "rwt"                   : [8, 20],
+    "tap-alertness"         : [5],
+    "tap-incompatibility"   : [15],
+    "tap-working"           : [1],
+    "tmt"                   : [2],
+    "wst"                   : [3],
+    "bisbas"                : [1, 2, 3, 4],
+    "cerq"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "cope"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    "f-sozu"                : [1, 2, 3, 4, 5],
+    "fev"                   : [3],
+    "lot-r"                 : [3],
+    "mspss"                 : [4],
+    "neo-ffi"               : [1, 2, 3, 4, 5],
+    "psq"                   : [5],
+    "tas"                   : [4],
+    "teique"                : [1, 2, 3, 4, 5],
+    "upps"                  : [1, 2, 3, 4],
+    "yfas"                  : [9]
+}
+
+BEHAVIORAL_FILENAMES = {
+    "cvlt"                  : "Cognitive_Test_Battery_LEMON/CVLT/CVLT.csv",
+    "lps"                   : "Cognitive_Test_Battery_LEMON/LPS/LPS.csv",
+    "rwt"                   : "Cognitive_Test_Battery_LEMON/RWT/RWT.csv",
+    "tap-alertness"         : "Cognitive_Test_Battery_LEMON/TAP_Alertness/TAP-Alertness.csv",
+    "tap-incompatibility"   : "Cognitive_Test_Battery_LEMON/TAP_Incompatibility/TAP-Incompatibility.csv",
+    "tap-working"           : "Cognitive_Test_Battery_LEMON/TAP_Working_Memory/TAP-Working Memory.csv",
+    "tmt"                   : "Cognitive_Test_Battery_LEMON/TMT/TMT.csv",
+    "wst"                   : "Cognitive_Test_Battery_LEMON/WST/WST.csv",
+    "bisbas"                : "Emotion_and_Personality_Test_Battery_LEMON/BISBAS.csv",
+    "cerq"                  : "Emotion_and_Personality_Test_Battery_LEMON/CERQ.csv",
+    "cope"                  : "Emotion_and_Personality_Test_Battery_LEMON/COPE.csv",
+    "f-sozu"                : "Emotion_and_Personality_Test_Battery_LEMON/F-SozU_K-22.csv",
+    "fev"                   : "Emotion_and_Personality_Test_Battery_LEMON/FEV.csv",
+    "lot-r"                 : "Emotion_and_Personality_Test_Battery_LEMON/LOT-R.csv",
+    "mspss"                 : "Emotion_and_Personality_Test_Battery_LEMON/MSPSS.csv",
+    "neo-ffi"               : "Emotion_and_Personality_Test_Battery_LEMON/NEO_FFI.csv",
+    "psq"                   : "Emotion_and_Personality_Test_Battery_LEMON/PSQ.csv",
+    "tas"                   : "Emotion_and_Personality_Test_Battery_LEMON/TAS.csv",
+    "teique"                : "Emotion_and_Personality_Test_Battery_LEMON/TEIQue-SF.csv",
+    "upps"                  : "Emotion_and_Personality_Test_Battery_LEMON/UPPS.csv",
+    "yfas"                  : "Emotion_and_Personality_Test_Battery_LEMON/YFAS.csv"
+}
+
 def get_behavioral_test(filepath, test):
     """
     extracts the behavioral information from patients
@@ -266,226 +317,31 @@ def get_behavioral_test(filepath, test):
     return      : dictionary of behavioral scores for given metric
     """
 
-    BEHAVIORAL_DIR = filepath + "Cognitive_Test_Battery_LEMON/"
-
-    behavioral_dict = {}
-    filename = ""
-    cols = []
-
     test = test.lower()
-    if test == "cvlt":
-        """
-        1= test version of the CVLT
-        2= number of correct  recalls after hearing the list for the first time
-        3= number of correct  recalls after hearing the list for the fifth time
-        4= Proactive Interference (Interference from previosly learned information)
-        5= Retroactive Interference
-        6= sum of all correct recalls from first until fifth trial
-        7= sum of all correct recalls from first until fith trial with an age-gender-education correction
-        8= number of correct recalls from the interference task (List B)
-        9= number of correct recalls (short delay)
-        10= number of correct recalls when category cues are presented (short delay)
-        11= number of correct recalls after 20 minutes (long delay recall) 
-        12= number of correct recalls when category cues are presented (long delay recall)
-        13= delayed recognition memory performance
-        14= overall repetitions
-        15=overall intrusions
-        16= comments
-        """
-
-        filename = "CVLT/CVLT.csv"
-        cols = [4, 10, 11, 13]
-        # notes:
-
-    elif test == "lps":
-        """
-        LPS_1 = LPS raw data, how many symbol-rows did the participant process correctly
-        LPS_2 = comments
-        """
-        filename = "LPS/LPS.csv"
-        cols = [1]
-        # notes: 
-
-    elif test == "rwt":
-        """
-        S-words
-        RWT_1 = how many s-words did the participant name during the first minute (according to rules)
-        RWT_2 = percentile rank of correct words for the subtest 's-words' (1 minute)
-        RWT_3 = how many repetitions during the first minute
-        RWT_4 = how many rule breaks during the first minute
-        RWT_5 = how many s-words did the participant name during the second minute (according to rules)
-        RWT_6 = how many repetitions during the second minute
-        RWT_7 = how many rule breaks during the second minute
-        RWT_8 = how many s-words did the pp. name in total (according to rules); two minutes
-        RWT_9 = percentile rank of correct words for the subtest 's-words' (2 minutes)
-        RWT_10 = how many repetitions in total; two minutes
-        RWT_11 = how many rule breaks in total; two minutes
-        RWT_12 = comments (s-words)
-
-        Animals
-        RWT_13 = how many animals did the participant. name in the first minute (according to rules)
-        RWT_14 = percentile rank of correct words for the subtest 'animal' (1 minute)
-        RWT_15 = how many repetitions during the first minute (animals)
-        RWT_16 = how many rule breaks during the first minute (animals)
-        RWT_17 = how many animals did the pp. name during the second minute (according to rules)
-        RWT_18 = how many repetitions during the second minute (animals)
-        RWT_19 = how many rule breaks during the second minute (animals)
-        RWT_20 = how many animals did the pp. name in total (according to rules); two minutes
-        RWT_21 = percentile rank of correct words for the subtest 'animals' (2 minutes)
-        RWT_22 = how many repetitions in total; two minutes (animals)
-        RWT_23 = how many rule breaks during the second minute (animals)
-        RWT_24 = comments (animals)
-        """
-
-        filename = "RWT/RWT.csv"
-        cols = [8, 20]
-        # notes: add cols 8 and 20?
-
-    elif test == "tap":
-        dict1 = get_behavioral_test(filepath, "tap-alertness")
-        dict2 = get_behavioral_test(filepath, "tap-incompatibility")
-        dict3 = get_behavioral_test(filepath, "tap-working")
-        
-        # notes: combine dicts instead of returning separately?
-        return [dict1, dict2, dict3]
-    
-    elif test == "tap-alertness":
-        """
-        TAP_A_1 = reaction time medians for 1. round (no signal)
-        TAP_A_2 = reaction time medians for 2. round (signal)
-        TAP_A_3 = reaction time medians for 3. round (signal)
-        TAP_A_4 = reaction time medians for 4. round (no signal)
-
-        NO signal (aggregate scores)
-        TAP_A_5 = mean reaction time (no signal)
-        TAP_A_6 = median reaction time (no signal)
-        TAP_A_7 = % (no signal)
-        TAP_A_8 = standard deviations (no signal)
-        TAP_A_9 = % (no signal)
-
-        Signal (aggregate scores)
-        TAP_A_10 = mean reaction time (signal)
-        TAP_A_11 = median reaction time (signal)
-        TAP_A_12 = % (signal)
-        TAP_A_13 = standard deviations (signal)
-        TAP_A_14 = % (signal)
-
-        Phasic alertness
-        TAP_A_15 = phasic alertness
-        TAP_A_16 = % (phasic alertness)
-        TAP_A_17 = comments
-        """
-
-        filename = "TAP_Alertness/TAP-Alertness.csv"
-        cols = [5]
-
-        # notes: i think for dependency reasons we only need to choose 1 (with/without signal)
-
-    elif test == "tap-incompatibility":
-        """
-        Compatible stimuli
-        TAP_I_1 = mean time for compatible stimuli
-        TAP_I_2 = median time for compatible stimuli
-        TAP_I_3 = %
-        TAP_I_4 = standard deviations
-        TAP_I_5 = %
-        TAP_I_6 = how many errors did participant make during compatible stimuli presentation
-        TAP_I_7 = %
-
-        Incompatible stimuli
-        TAP_I_8 = mean time for incompatible stimuli
-        TAP_I_9 = median time for incompatible stimuli
-        TAP_I_10 = %
-        TAP_I_11 = standard deviations
-        TAP_I_12 = %
-        TAP_I_13 = how many errors did participant make during incompatible stimuli presentation
-        TAP_I_14 = %
-
-        Whole stimuli
-        TAP_I_15 = mean time for whole stimuli presentation
-        TAP_I_16 = median time for whole stimuli presentation
-        TAP_I_17 = %
-        TAP_I_18 = standard deviations
-        TAP_I_19 = %
-        TAP_I_20 = how many errors did participant make during whole stimuli presentation
-        TAP_I_21 = %
-
-        F-values
-        TAP_I_22 = F-value_visual_field
-        TAP_I_23 = %
-        TAP_I_24 = F-value_hand
-        TAP_I_25 = %
-        TAP_I_26 = F-value_visual_field_x_hand
-        TAP_I_27 = %
-        TAP_I_28 = comments
-        """
-
-        filename = "TAP_Incompatibility/TAP-Incompatibility.csv"
-        cols = [15]
-
-        # notes:
-    
-    elif test == "tap-working":
-        """
-        TAP_WM_1 = mean reaction time for correct pressed bottoms (correct answers)
-        TAP_WM_2 = reaction time median
-        TAP_WM_3 = %
-        TAP_WM_4 = standard deviations
-        TAP_WM_5 = %
-        TAP_WM_6 = how many correct matches
-        TAP_WM_7 = how many incorrect matches (errors)
-        TAP_WM_8 = %
-        TAP_WM_9 = how many missed matches (omissions)
-        TAP_WM_10 = %
-        TAP_WM_11 = outliers
-        TAP_WM_12 = comments
-        """
-
-        filename = "TAP_Working_Memory/TAP-Working Memory.csv"
-        cols = [1]
-
-        # notes: should really be wm2 / (wm6 / (wm6 + wm7 + wm9))
-
-    elif test == "tmt":
-        """
-        TMT_1 = time it took to connect numbers (seconds. milliseconds)
-        TMT_2 = brain functions based on performance for Trail A (Reitan & Wolfson, 1988)
-        TMT_3 = how many errors did the pp. make
-        TMT_4 = comments
-        TMT_5 = time it took to connect numbers and letters (seconds. milliseconds)
-        TMT_6 = brain functions based on performance for Trail B (Reitan & Wolfson, 1988)
-        TMT_7 = how many errors did the pp. make
-        TMT_8 = comments
-        """ 
-
-        filename = "TMT/TMT.csv"
-        cols = [2]
-
-        # notes: should probably sum 2 and 6
-
-    elif test == "wst":
-        """
-        WST_1 = WST raw data; how many real words did the pp. recognize correctly
-        WST_2 = z-scale
-        WST_3 = IQ-scale
-        WST_4 = Z-scale
-        WST_5 = comments
-        """
-
-        filename = "WST/WST.csv"
-        cols = [3]
-
-        # notes: 
-
-    else:
-        print("behavioral test not configured :", test)
-        return
-
-    with open(BEHAVIORAL_DIR + filename, 'r') as fin:
-        data = csv.reader(fin)
+    filename = filepath + BEHAVIORAL_FILENAMES[test]
+    with open(filename, 'r') as f:
+        data = csv.reader(f)
         next(data, None)  # skip header
+        cols = BEHAVIORAL_COLUMNS[test]
         behavioral_dict = {rows[0]:[rows[col] for col in cols] for rows in data}
     return behavioral_dict
+
+
+def get_behavioral_column_names(filepath, tests):
+    """
+    gets the columns selected for behavioral data
+    """
+
+    colnames = []
+    for test in tests:
+        test = test.lower()
+        filename = filepath + BEHAVIORAL_FILENAMES[test]
+        with open(filename, 'r') as f:
+            data = csv.reader(f)
+            cols = np.array(next(data, None))
+            colnames += list(cols[BEHAVIORAL_COLUMNS[test]])
+    
+    return colnames
 
 
 def preprocess_behavioral_dict(behavioral_dict):

@@ -97,19 +97,24 @@ def load_behavioral_data(filepath, behavioral_dir, patientIDs):
     """
 
     behavioral_path = filepath + behavioral_dir
-    behavioral_test = ['cvlt', 'lps']
-    behavioral_test_data = [preprocess_behavioral_dict(get_behavioral_test(behavioral_path, test)) for test in behavioral_test]
+    behavioral_tests = preprocessing.BEHAVIORAL_TESTS
+    behavioral_test_columns = preprocessing.get_behavioral_column_names(behavioral_path, behavioral_tests)
+    behavioral_test_data = [preprocess_behavioral_dict(get_behavioral_test(behavioral_path, test)) for test in behavioral_tests]
 
     print("loading behavioral data from", filepath, "...")
     behavioral_data = []
     for patientID in tqdm(patientIDs):
-        behavioral_data.append([])
-        for test_data in behavioral_test_data:
-            behavioral_data[-1] += test_data[patientID]
-        behavioral_data[-1] = np.array(behavioral_data[-1])
+        try:
+            behavioral_data.append([])
+            for test_data in behavioral_test_data:
+                behavioral_data[-1] += test_data[patientID]
+            behavioral_data[-1] = np.array(behavioral_data[-1])
+        except KeyError:
+            print("subject removed (lack of behavioral data) :", patientID)
+            continue
     behavioral_data = np.stack(behavioral_data)
 
-    return behavioral_data
+    return behavioral_data, behavioral_test_columns
 
 
 def load_data(filepath, mri_dir, eeg_dir, behavioral_dir, patientIDs):
@@ -125,10 +130,10 @@ def load_data(filepath, mri_dir, eeg_dir, behavioral_dir, patientIDs):
     print()
     mri_data = load_mri_data(filepath, mri_dir, patientIDs)
     eeg_data = load_eeg_data(filepath, eeg_dir, patientIDs)
-    behavioral_data = load_behavioral_data(filepath, behavioral_dir, patientIDs)
+    behavioral_data, behavioral_data_columns = load_behavioral_data(filepath, behavioral_dir, patientIDs)
     print()
 
-    return  mri_data, eeg_data, behavioral_data
+    return  mri_data, eeg_data, behavioral_data, behavioral_data_columns
 
 
 def main(train=False, preprocess=True):
@@ -141,12 +146,14 @@ def main(train=False, preprocess=True):
     # for patientID in patientIDs:
     #     preprocessing.compress_preprocessed_EEG(preprocessing.DATA_PATH + preprocessing.EEG_DIR, patientID)
 
-    mri_data, eeg_data, behavioral_data = load_data(
+    mri_data, eeg_data, behavioral_data, behavioral_data_columns = load_data(
         preprocessing.DATA_PATH, 
         preprocessing.MRI_RESULT_DIR, 
         preprocessing.EEG_RESULT_DIR,
         preprocessing.BEHAVIORAL_DIR,
         patientIDs)
+    
+    print(behavioral_data_columns)
     
     # mri_data = preprocessing.add_colorchannels(mri_data)
     # _, mri_data = preprocessing.load_preprocessing("../data/mri_acs/")
@@ -222,6 +229,6 @@ def main(train=False, preprocess=True):
 if __name__ == "__main__":
     os.system("clear")
     main(
-        train       = True,
+        train       = False,
         preprocess  = False
         )
