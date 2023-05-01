@@ -222,36 +222,14 @@ class SimpleNN(tf.keras.Model):
 class EEGModel(tf.keras.Model):
 
     """
-    EEG layout:
-    EEGNet tail (frozen, loaded from .h5), 
-    linear layers as classifier
-
-    """
-
-    #replace below with number of classes, channels, samples from data once preprocessing begins working
-    # n_classes = 0
-    # n_channels = 0
-    # n_samples = 204
-    # inputs = None
-    # labels = None
-
-
-    """
     Model is already configured for variable number of classes, channels, and samples
     If needed, will need to copy and replace parts of EEGModels.py to change classification head
     Below code is derived from comments in the original EEGNet.py file
     """
 
-    # model = EEGNet(nb_classes = n_classes, Chans = n_channels, Samples = n_samples)
-    # model.compile(loss = tf.keras.losses.SparseCategoricalCrossentropy, optimizer = tf.keras.optimizers.Adam, metrics = tf.keras.metrics.AUC)
-    # fitted = model.fit(x = inputs, y = labels, epochs = 30)
-    # predicted = model.predict(x = inputs)
-
     def __init__(self, output_units=2, name="eegnet"):
 
         super().__init__()
-
-
         
         eegnet = tf.keras.models.load_model('data/weights/EEGNet-8-2-weights.h5').layers
         self.tail = []
@@ -273,6 +251,7 @@ class EEGModel(tf.keras.Model):
             '''
             layer.trainable = False
             self.tail.append(layer)
+
         '''
         self.tail = [
             tf.keras.layers.Conv2D(8, (1, 64), padding = 'same', use_bias=False),
@@ -307,6 +286,35 @@ class EEGModel(tf.keras.Model):
     def call(self, x):
         for layer in self.tail:
             x = layer(x)
+        for layer in self.head:
+            x = layer(x)
+        
+        return x
+
+
+
+class NeuroVisionModel(tf.keras.Model):
+
+    def __init__(self, output_units=2, name="NeuroVision"):
+
+        super().__init__(name=name)
+
+        self.eegmodel = EEGModel(output_units=20)
+        self.mrimodel = VGGACSModel(output_units=20)
+
+        self.head = [
+            tf.keras.layers.Dense(output_units)
+        ]
+
+        self.loss = tf.keras.losses.MeanSquaredError()
+        self.optimizer = tf.keras.optimizers.Adam(0.01)
+    
+    def call(self, data):
+        eeg_data, mri_data = data
+        eegmodel_out = self.eegmodel(eeg_data)
+        mrimodel_out = self.mrimodel(mri_data)
+
+        x = tf.concat([eegmodel_out, mrimodel_out], axis=0)
         for layer in self.head:
             x = layer(x)
         

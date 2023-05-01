@@ -7,7 +7,7 @@ import tensorflow as tf
 import preprocessing
 from preprocessing import get_behavioral_test, preprocess_behavioral_dict
 import models
-from models import VGG3DModel, VGGSlicedModel, VGGACSModel, EEGModel
+from models import VGG3DModel, VGGSlicedModel, VGGACSModel, EEGModel, NeuroVisionModel
 
 
 
@@ -153,8 +153,6 @@ def main(train=False, preprocess=True):
         preprocessing.BEHAVIORAL_DIR,
         patientIDs)
     
-    print(behavioral_data_columns)
-    
     # mri_data = preprocessing.add_colorchannels(mri_data)
     # _, mri_data = preprocessing.load_preprocessing("../data/mri_acs/")
     # preprocessing.applyVGG(mri_data, patientIDs, downsampling_factor=4)
@@ -171,8 +169,7 @@ def main(train=False, preprocess=True):
     eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
     eegnet_model.build(train_eeg_data.shape)
     eegnet_model.summary()
-    if train:
-        eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=10, validation_data=(test_eeg_data, test_behavioral_data))
+    if train: eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=10, validation_data=(test_eeg_data, test_behavioral_data))
 
     print("\ntraining control models ...\n")
 
@@ -186,15 +183,16 @@ def main(train=False, preprocess=True):
     print("\ntraining new models ...\n")
 
     vgg_acs_model = VGGACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1])
-    vgg_acs_model.compile(
-		optimizer=vgg_acs_model.optimizer,
-		loss=vgg_acs_model.loss,
-		metrics=[],
-	)
+    vgg_acs_model.compile(optimizer=vgg_acs_model.optimizer, loss=vgg_acs_model.loss, metrics=[])
     vgg_acs_model.build(train_mri_data.shape)
     vgg_acs_model.summary()
-    if train:
-        vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+    if train: vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+
+    neurovision_model = NeuroVisionModel(output_units=behavioral_data.shape[1])
+    neurovision_model.compile(optimizer=neurovision_model.optimizer, loss=neurovision_model.loss, metrics=[])
+    neurovision_model([train_eeg_data[:2], train_mri_data[:2]])
+    neurovision_model.summary()
+    neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=4, epochs=1, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
 
     print_results(
         [center_model, mean_model, median_model, simple_nn, vgg_acs_model], 
