@@ -97,7 +97,7 @@ def load_behavioral_data(filepath, behavioral_dir, patientIDs):
     """
 
     behavioral_path = filepath + behavioral_dir
-    behavioral_tests = preprocessing.BEHAVIORAL_TESTS
+    behavioral_tests = ["cvlt"]
     behavioral_test_columns = preprocessing.get_behavioral_column_names(behavioral_path, behavioral_tests)
     behavioral_test_data = [preprocess_behavioral_dict(get_behavioral_test(behavioral_path, test)) for test in behavioral_tests]
 
@@ -160,8 +160,8 @@ def main():
     eegnet_model = models.EEGModel(output_units=behavioral_data.shape[1])
     eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
     eegnet_model.build(train_eeg_data.shape)
-    eegnet_model.summary()
-    # eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=10, validation_data=(test_eeg_data, test_behavioral_data))
+    # eegnet_model.summary()
+    # eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=30, validation_data=(test_eeg_data, test_behavioral_data))
 
     print("\ntraining control models ...\n")
 
@@ -170,7 +170,7 @@ def main():
     median_model = models.MedianModel(name="control (median)", train_labels=train_behavioral_data)
     simple_nn = models.SimpleNN(name="control (1layerNN)", output_units=behavioral_data.shape[1])
     simple_nn.compile(optimizer=simple_nn.optimizer, loss=simple_nn.loss, metrics=[])
-    simple_nn.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+    # simple_nn.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
 
     print("\ntraining new models ...\n")
 
@@ -182,7 +182,7 @@ def main():
 	)
     vgg_acs_model.build(train_mri_data.shape)
     vgg_acs_model.summary()
-    vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_mri_data, test_behavioral_data))
+    vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=4, epochs=32, validation_data=(test_mri_data, test_behavioral_data))
 
     print_results(
         [center_model, mean_model, median_model, simple_nn, vgg_acs_model], 

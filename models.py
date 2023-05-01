@@ -296,10 +296,8 @@ class EEGModel(tf.keras.Model):
         '''
 
         self.head = [
-            tf.keras.layers.Dense(128, activation="leaky_relu", name=f"{name}_dense_1"),
-            tf.keras.layers.Dense(64, activation="leaky_relu", name=f"{name}_dense_2"),
-            tf.keras.layers.Dropout(0.1),
-            tf.keras.layers.Dense(64, activation="leaky_relu", name=f"{name}_dense_3"),
+            tf.keras.layers.Dense(20, kernel_regularizer='l2', activation="leaky_relu", name=f"{name}_dense_1"),
+            tf.keras.layers.Dropout(0.2),
             tf.keras.layers.Dense(output_units, activation="softmax", name=f"{name}_output")
         ]
 
