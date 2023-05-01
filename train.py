@@ -10,18 +10,21 @@ import models
 
 
 
-def rank_accuracy(model, test_data, test_labels, behavioral_columns):
+def rank_accuracy(model, test_data, control_model, control_test_data, test_labels, behavioral_columns):
     """
     ranks behavioral categories by thier predictability by a model
     """
 
     pred_labels = model.call(test_data)
+    control_pred_labels = control_model.call(control_test_data)
 
     mean_squared_diff = tf.math.reduce_mean(tf.math.square(test_labels - pred_labels), axis=0).numpy()
+    mean_squared_diff_control = tf.math.reduce_mean(tf.math.square(test_labels - control_pred_labels), axis=0).numpy()
+    predictability = mean_squared_diff_control - mean_squared_diff
 
-    sorted_mean_squared_diff, sorted_behavioral_columns = zip(*sorted(zip(mean_squared_diff, behavioral_columns)))
+    sorted_predictability, sorted_mean_squared_diff, sorted_behavioral_columns = zip(*sorted(zip(predictability, mean_squared_diff, behavioral_columns)))
 
-    table_df = pd.DataFrame(data=sorted_mean_squared_diff, index=sorted_behavioral_columns, columns=['MeanSquaredError'])
+    table_df = pd.DataFrame(data=[sorted_predictability, sorted_mean_squared_diff], index=sorted_behavioral_columns, columns=["difference w/ control in MSE", "MSE"])
 
     print("\nbehavioral categories ranked by predictability")
     print(table_df)
@@ -192,7 +195,7 @@ def main():
     eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
     eegnet_model.build(train_eeg_data.shape)
     eegnet_model.summary()
-    eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=20, validation_data=(test_eeg_data, test_behavioral_data))
+    eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=4, validation_data=(test_eeg_data, test_behavioral_data))
 
 
     vgg_acs_model = models.VGGACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1])
@@ -209,7 +212,7 @@ def main():
     neurovision_model.compile(optimizer=neurovision_model.optimizer, loss=neurovision_model.loss, metrics=[])
     neurovision_model([train_eeg_data[:2], train_mri_data[:2]])
     neurovision_model.summary()
-    neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=25, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
+    neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=1, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
 
     print_results(
         [center_model, mean_model, median_model, simple_nn, vgg_acs_model, eegnet_model, neurovision_model], 
@@ -217,7 +220,7 @@ def main():
         test_behavioral_data, [tf.keras.losses.MeanSquaredError()])
 
     
-    rank_accuracy(neurovision_model, [test_eeg_data, test_mri_data], test_behavioral_data, behavioral_columns)
+    rank_accuracy(neurovision_model, [test_eeg_data, test_mri_data], mean_model, test_mri_data, test_behavioral_data, behavioral_columns)
 
 
     """
