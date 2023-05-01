@@ -295,12 +295,12 @@ class EEGModel(tf.keras.Model):
 
 class NeuroVisionModel(tf.keras.Model):
 
-    def __init__(self, output_units=2, name="NeuroVision"):
+    def __init__(self, mri_input_shape=(), output_units=2, name="NeuroVision"):
 
         super().__init__(name=name)
 
         self.eegmodel = EEGModel(output_units=20)
-        self.mrimodel = VGGACSModel(output_units=20)
+        self.mrimodel = VGGACSModel(input_shape=mri_input_shape, output_units=20)
 
         self.head = [
             tf.keras.layers.Dense(output_units)
