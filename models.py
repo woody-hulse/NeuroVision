@@ -313,8 +313,8 @@ class NeuroVisionModel(tf.keras.Model):
         eeg_data, mri_data = data
         eegmodel_out = self.eegmodel(eeg_data)
         mrimodel_out = self.mrimodel(mri_data)
-
-        x = tf.concat([eegmodel_out, mrimodel_out], axis=0)
+        
+        x = tf.concat([eegmodel_out, mrimodel_out], axis=1)
         for layer in self.head:
             x = layer(x)
         
