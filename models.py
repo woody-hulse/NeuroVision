@@ -121,7 +121,7 @@ class VGGSlicedModel(tf.keras.Model):
 
 class VGGACSModel(tf.keras.Model):
 
-    def __init__(self, input_shape=(256, 256, 3), output_units=1, freeze_vgg=True, name="vgg_acs"):
+    def __init__(self, input_shape=(256, 256, 3), output_units=1, freeze_vgg=True, output_activation="sigmoid", name="vgg_acs"):
 
         super().__init__()
 
@@ -139,8 +139,8 @@ class VGGACSModel(tf.keras.Model):
             tf.keras.layers.Dense(32, activation="relu", name=f"{name}_dense_2"),
             tf.keras.layers.Dropout(0.2, name=f"{name}_dropout_2")
         ]
-        self.output_layer = tf.keras.layers.Dense(
-            output_units, activation='softmax', name=f"{name}_output_dense")
+
+        self.output_layer = tf.keras.layers.Dense(output_units, activation=output_activation, name=f"{name}_output")
 
         if freeze_vgg:
             self.vgg.trainable = False
@@ -227,7 +227,7 @@ class EEGModel(tf.keras.Model):
     Below code is derived from comments in the original EEGNet.py file
     """
 
-    def __init__(self, output_units=2, name="eegnet"):
+    def __init__(self, output_units=2, output_activation="sigmoid", name="eegnet"):
 
         super().__init__()
         
@@ -277,8 +277,9 @@ class EEGModel(tf.keras.Model):
         self.head = [
             tf.keras.layers.Dense(20, kernel_regularizer='l2', activation="leaky_relu", name=f"{name}_dense_1"),
             tf.keras.layers.Dropout(0.2),
-            tf.keras.layers.Dense(output_units, activation="softmax", name=f"{name}_output")
         ]
+
+        self.output_layer = tf.keras.layers.Dense(output_units, activation=output_activation, name=f"{name}_output")
 
         self.loss = tf.keras.losses.MeanSquaredError()
         self.optimizer = tf.keras.optimizers.Adam(0.01)
@@ -288,6 +289,7 @@ class EEGModel(tf.keras.Model):
             x = layer(x)
         for layer in self.head:
             x = layer(x)
+        x = self.output_layer(x)
         
         return x
 
@@ -299,8 +301,8 @@ class NeuroVisionModel(tf.keras.Model):
 
         super().__init__(name=name)
 
-        self.eegmodel = EEGModel(output_units=20)
-        self.mrimodel = VGGACSModel(input_shape=mri_input_shape, output_units=20)
+        self.eegmodel = EEGModel(output_units=20, output_activation="softmax")
+        self.mrimodel = VGGACSModel(input_shape=mri_input_shape, output_units=20, output_activation="softmax")
 
         self.head = [
             tf.keras.layers.Dense(output_units)

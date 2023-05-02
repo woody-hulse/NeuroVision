@@ -3,6 +3,7 @@ import os
 from tqdm import tqdm
 import pandas as pd
 import tensorflow as tf
+import scipy
 
 import preprocessing
 from preprocessing import get_behavioral_test, preprocess_behavioral_dict
@@ -18,13 +19,22 @@ def rank_accuracy(model, test_data, control_model, control_test_data, test_label
     pred_labels = model.call(test_data)
     control_pred_labels = control_model.call(control_test_data)
 
-    mean_squared_diff = tf.math.reduce_mean(tf.math.square(test_labels - pred_labels), axis=0).numpy()
-    mean_squared_diff_control = tf.math.reduce_mean(tf.math.square(test_labels - control_pred_labels), axis=0).numpy()
-    predictability = mean_squared_diff_control - mean_squared_diff
+    squared_diff = tf.math.square(test_labels - pred_labels)
+    squared_diff_control = tf.math.square(test_labels - control_pred_labels)
 
-    sorted_predictability, sorted_mean_squared_diff, sorted_behavioral_columns = zip(*sorted(zip(predictability, mean_squared_diff, behavioral_columns)))
+    mean_squared_diff = tf.math.reduce_mean(squared_diff, axis=0).numpy()
+    mean_squared_diff_control = tf.math.reduce_mean(squared_diff_control, axis=0).numpy()
 
-    table_df = pd.DataFrame(data=[sorted_predictability, sorted_mean_squared_diff], index=sorted_behavioral_columns, columns=["difference w/ control in MSE", "MSE"])
+    predictability = mean_squared_diff - mean_squared_diff_control 
+
+    p_values = np.zeros(squared_diff.shape[1])
+    for i in range(squared_diff.shape[1]):
+	    p_values[i] = scipy.stats.ttest_ind(a=squared_diff[:, i], b=squared_diff_control[:, i], equal_var=False).pvalue
+
+    sorted_predictability, sorted_mean_squared_diff, sorted_behavioral_columns, sorted_p_values = zip(*sorted(zip(predictability, mean_squared_diff, behavioral_columns, p_values)))
+
+    data = np.array([sorted_predictability, sorted_mean_squared_diff, sorted_p_values]).T
+    table_df = pd.DataFrame(data=data, index=sorted_behavioral_columns, columns=["performance against control in MSE*", "MSE", "p-value"])
 
     print("\nbehavioral categories ranked by predictability")
     print(table_df)
@@ -195,7 +205,7 @@ def main():
     eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
     eegnet_model.build(train_eeg_data.shape)
     eegnet_model.summary()
-    eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=4, validation_data=(test_eeg_data, test_behavioral_data))
+    eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=4, epochs=1, validation_data=(test_eeg_data, test_behavioral_data))
 
 
     vgg_acs_model = models.VGGACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1])
@@ -212,15 +222,15 @@ def main():
     neurovision_model.compile(optimizer=neurovision_model.optimizer, loss=neurovision_model.loss, metrics=[])
     neurovision_model([train_eeg_data[:2], train_mri_data[:2]])
     neurovision_model.summary()
-    neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=1, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
+    neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=4, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
 
     print_results(
-        [center_model, mean_model, median_model, simple_nn, vgg_acs_model, eegnet_model, neurovision_model], 
-        [test_mri_data, test_mri_data, test_mri_data, test_mri_data, test_mri_data, test_eeg_data, [test_eeg_data, test_mri_data]], 
+        [center_model, median_model, simple_nn, vgg_acs_model, eegnet_model, neurovision_model], 
+        [test_mri_data, test_mri_data, test_mri_data, test_mri_data, test_eeg_data, [test_eeg_data, test_mri_data]], 
         test_behavioral_data, [tf.keras.losses.MeanSquaredError()])
 
     
-    rank_accuracy(neurovision_model, [test_eeg_data, test_mri_data], mean_model, test_mri_data, test_behavioral_data, behavioral_columns)
+    rank_accuracy(neurovision_model, [test_eeg_data, test_mri_data], median_model, test_mri_data, test_behavioral_data, behavioral_columns)
 
 
     """
