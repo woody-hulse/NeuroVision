@@ -389,7 +389,7 @@ class SimpleNN(tf.keras.Model):
 
     def __init__(self, output_units, name="control (1layerNN)"):
 
-        super().__init__()
+        super().__init__(name=name)
         self.flatten = tf.keras.layers.Flatten()
         self.dense = tf.keras.layers.Dense(output_units, activation='softmax')
 
