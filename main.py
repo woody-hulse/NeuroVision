@@ -142,10 +142,6 @@ def main(train=False, preprocess=True):
     
     patientIDs = get_patientIDs(preprocessing.DATA_PATH, preprocessing.MRI_RESULT_DIR, preprocessing.EEG_RESULT_DIR, sync=True)
 
-    #temp
-    # for patientID in patientIDs:
-    #     preprocessing.compress_preprocessed_EEG(preprocessing.DATA_PATH + preprocessing.EEG_DIR, patientID)
-
     mri_data, eeg_data, behavioral_data, behavioral_data_columns = load_data(
         preprocessing.DATA_PATH, 
         preprocessing.MRI_RESULT_DIR, 
@@ -194,34 +190,31 @@ def main(train=False, preprocess=True):
     neurovision_model.summary()
     neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=4, epochs=1, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
 
+    """
+    vgg3d_model = VGG3DModel(output_units=behavioral_data.shape[1])
+    vgg3d_model.compile(
+		optimizer=vgg3d_model.optimizer,
+		loss=vgg3d_model.loss,
+		metrics=[],
+	)
+    vgg3d_model.build(mri_data.shape)
+    vgg3d_model.summary()
+    vgg3d_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
+
+    vggsliced_model = VGGSlicedModel(output_units=behavioral_data.shape[1])
+    vggsliced_model.compile(
+		optimizer=vggsliced_model.optimizer,
+		loss=vggsliced_model.loss,
+		metrics=[],
+	)
+    vggsliced_model.build(mri_data.shape)
+    vggsliced_model.summary()
+    vggsliced_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
+    """
+
     print_results(
         [center_model, mean_model, median_model, simple_nn, vgg_acs_model], 
         test_mri_data, test_behavioral_data, [tf.keras.metrics.MeanSquaredError()])
-
-    """
-    model = VGG3DModel(output_units=behavioral_data.shape[1])
-    model.compile(
-		optimizer=model.optimizer,
-		loss=model.loss,
-		metrics=[],
-	)
-    model.build(mri_data.shape)
-    model.summary()
-    model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
-    """
-
-
-    """
-    model = VGGSlicedModel(output_units=behavioral_data.shape[1])
-    model.compile(
-		optimizer=model.optimizer,
-		loss=model.loss,
-		metrics=[],
-	)
-    model.build(mri_data.shape)
-    model.summary()
-    model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
-    """
 
 
 if __name__ == "__main__":

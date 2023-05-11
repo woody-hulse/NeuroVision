@@ -25,6 +25,57 @@ BEHAVIORAL_DIR = "behavioral/"
 VGG_DIR = "mri_vgg/"
 
 
+BEHAVIORAL_TESTS = ["cvlt", "lps", "rwt", "tap-alertness", "tap-incompatibility", "tap-working", "tmt", "wst", "bisbas",
+                    "cerq", "cope", "f-sozu", "fev", "lot-r", "mspss", "neo-ffi", "psq", "tas", "teique", "upps"]
+
+BEHAVIORAL_COLUMNS = {
+    "cvlt"                  : [4, 10, 11, 13],
+    "lps"                   : [1],
+    "rwt"                   : [8, 20],
+    "tap-alertness"         : [5],
+    "tap-incompatibility"   : [15],
+    "tap-working"           : [1],
+    "tmt"                   : [2],
+    "wst"                   : [3],
+    "bisbas"                : [1, 2, 3, 4],
+    "cerq"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "cope"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    "f-sozu"                : [1, 2, 3, 4, 5],
+    "fev"                   : [3],
+    "lot-r"                 : [3],
+    "mspss"                 : [4],
+    "neo-ffi"               : [1, 2, 3, 4, 5],
+    "psq"                   : [5],
+    "tas"                   : [4],
+    "teique"                : [1, 2, 3, 4, 5],
+    "upps"                  : [1, 2, 3, 4],
+    "yfas"                  : [9]
+}
+
+BEHAVIORAL_FILENAMES = {
+    "cvlt"                  : "Cognitive_Test_Battery_LEMON/CVLT/CVLT.csv",
+    "lps"                   : "Cognitive_Test_Battery_LEMON/LPS/LPS.csv",
+    "rwt"                   : "Cognitive_Test_Battery_LEMON/RWT/RWT.csv",
+    "tap-alertness"         : "Cognitive_Test_Battery_LEMON/TAP_Alertness/TAP-Alertness.csv",
+    "tap-incompatibility"   : "Cognitive_Test_Battery_LEMON/TAP_Incompatibility/TAP-Incompatibility.csv",
+    "tap-working"           : "Cognitive_Test_Battery_LEMON/TAP_Working_Memory/TAP-Working Memory.csv",
+    "tmt"                   : "Cognitive_Test_Battery_LEMON/TMT/TMT.csv",
+    "wst"                   : "Cognitive_Test_Battery_LEMON/WST/WST.csv",
+    "bisbas"                : "Emotion_and_Personality_Test_Battery_LEMON/BISBAS.csv",
+    "cerq"                  : "Emotion_and_Personality_Test_Battery_LEMON/CERQ.csv",
+    "cope"                  : "Emotion_and_Personality_Test_Battery_LEMON/COPE.csv",
+    "f-sozu"                : "Emotion_and_Personality_Test_Battery_LEMON/F-SozU_K-22.csv",
+    "fev"                   : "Emotion_and_Personality_Test_Battery_LEMON/FEV.csv",
+    "lot-r"                 : "Emotion_and_Personality_Test_Battery_LEMON/LOT-R.csv",
+    "mspss"                 : "Emotion_and_Personality_Test_Battery_LEMON/MSPSS.csv",
+    "neo-ffi"               : "Emotion_and_Personality_Test_Battery_LEMON/NEO_FFI.csv",
+    "psq"                   : "Emotion_and_Personality_Test_Battery_LEMON/PSQ.csv",
+    "tas"                   : "Emotion_and_Personality_Test_Battery_LEMON/TAS.csv",
+    "teique"                : "Emotion_and_Personality_Test_Battery_LEMON/TEIQue-SF.csv",
+    "upps"                  : "Emotion_and_Personality_Test_Battery_LEMON/UPPS.csv",
+    "yfas"                  : "Emotion_and_Personality_Test_Battery_LEMON/YFAS.csv"
+}
+
 
 def applyACS(mri_data, patientIDs, save=True, path="../data/mri_acs/", downsampling_factor=2):
     """
@@ -256,57 +307,6 @@ def compress_preprocessed_EEG(filepath, patientID, num_channels=60, timesteps=10
         os.mkdir(filepath + "../" + EEG_RESULT_DIR)
     np.save(filepath + "../" + EEG_RESULT_DIR + patientID + ".npy", data)
 
-
-BEHAVIORAL_TESTS = ["cvlt", "lps", "rwt", "tap-alertness", "tap-incompatibility", "tap-working", "tmt", "wst", "bisbas",
-                    "cerq", "cope", "f-sozu", "fev", "lot-r", "mspss", "neo-ffi", "psq", "tas", "teique", "upps"]
-
-BEHAVIORAL_COLUMNS = {
-    "cvlt"                  : [4, 10, 11, 13],
-    "lps"                   : [1],
-    "rwt"                   : [8, 20],
-    "tap-alertness"         : [5],
-    "tap-incompatibility"   : [15],
-    "tap-working"           : [1],
-    "tmt"                   : [2],
-    "wst"                   : [3],
-    "bisbas"                : [1, 2, 3, 4],
-    "cerq"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    "cope"                  : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-    "f-sozu"                : [1, 2, 3, 4, 5],
-    "fev"                   : [3],
-    "lot-r"                 : [3],
-    "mspss"                 : [4],
-    "neo-ffi"               : [1, 2, 3, 4, 5],
-    "psq"                   : [5],
-    "tas"                   : [4],
-    "teique"                : [1, 2, 3, 4, 5],
-    "upps"                  : [1, 2, 3, 4],
-    "yfas"                  : [9]
-}
-
-BEHAVIORAL_FILENAMES = {
-    "cvlt"                  : "Cognitive_Test_Battery_LEMON/CVLT/CVLT.csv",
-    "lps"                   : "Cognitive_Test_Battery_LEMON/LPS/LPS.csv",
-    "rwt"                   : "Cognitive_Test_Battery_LEMON/RWT/RWT.csv",
-    "tap-alertness"         : "Cognitive_Test_Battery_LEMON/TAP_Alertness/TAP-Alertness.csv",
-    "tap-incompatibility"   : "Cognitive_Test_Battery_LEMON/TAP_Incompatibility/TAP-Incompatibility.csv",
-    "tap-working"           : "Cognitive_Test_Battery_LEMON/TAP_Working_Memory/TAP-Working Memory.csv",
-    "tmt"                   : "Cognitive_Test_Battery_LEMON/TMT/TMT.csv",
-    "wst"                   : "Cognitive_Test_Battery_LEMON/WST/WST.csv",
-    "bisbas"                : "Emotion_and_Personality_Test_Battery_LEMON/BISBAS.csv",
-    "cerq"                  : "Emotion_and_Personality_Test_Battery_LEMON/CERQ.csv",
-    "cope"                  : "Emotion_and_Personality_Test_Battery_LEMON/COPE.csv",
-    "f-sozu"                : "Emotion_and_Personality_Test_Battery_LEMON/F-SozU_K-22.csv",
-    "fev"                   : "Emotion_and_Personality_Test_Battery_LEMON/FEV.csv",
-    "lot-r"                 : "Emotion_and_Personality_Test_Battery_LEMON/LOT-R.csv",
-    "mspss"                 : "Emotion_and_Personality_Test_Battery_LEMON/MSPSS.csv",
-    "neo-ffi"               : "Emotion_and_Personality_Test_Battery_LEMON/NEO_FFI.csv",
-    "psq"                   : "Emotion_and_Personality_Test_Battery_LEMON/PSQ.csv",
-    "tas"                   : "Emotion_and_Personality_Test_Battery_LEMON/TAS.csv",
-    "teique"                : "Emotion_and_Personality_Test_Battery_LEMON/TEIQue-SF.csv",
-    "upps"                  : "Emotion_and_Personality_Test_Battery_LEMON/UPPS.csv",
-    "yfas"                  : "Emotion_and_Personality_Test_Battery_LEMON/YFAS.csv"
-}
 
 def get_behavioral_test(filepath, test):
     """

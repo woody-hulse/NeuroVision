@@ -16,6 +16,13 @@ import models
 def rank_accuracy(model, test_data, control_model, control_test_data, test_labels, behavioral_columns, plot=True):
     """
     ranks behavioral categories by thier predictability by a model
+    model               : model to compare to control
+    test_data           : testing dataset
+    control_model       :
+    control_test_data   : testing dataset for control model
+    test_labels         : behavioral labels for testing dataset
+    behavioral_columns  : corresponding behavioral columns for testing dataset
+    plot                : plot final graph
     """
 
     pred_labels = model.call(test_data)[0]
@@ -31,8 +38,8 @@ def rank_accuracy(model, test_data, control_model, control_test_data, test_label
 
     p_values = np.zeros(squared_diff.shape[1])
     for i in range(squared_diff.shape[1]):
-	    p_values[i] = scipy.stats.ttest_ind(a=squared_diff[:, i], b=squared_diff_control[:, i], equal_var=False).pvalue
-    
+        p_values[i] = scipy.stats.ttest_ind(a=squared_diff[:, i], b=squared_diff_control[:, i], equal_var=False).pvalue
+            
     sorted_predictability, sorted_mean_squared_diff, sorted_mean_squared_diff_control, sorted_behavioral_columns, sorted_p_values = zip(*sorted(zip(predictability, mean_squared_diff, mean_squared_diff_control, behavioral_columns, p_values)))
 
     data = np.array([sorted_predictability, sorted_mean_squared_diff, sorted_p_values]).T
@@ -80,6 +87,11 @@ def rank_accuracy(model, test_data, control_model, control_test_data, test_label
 def print_results(models, test_data, test_labels, metrics, plot=True):
     """
     prints the results of each model after training
+    models          : list of models to compare
+    test_data       : corresponding list of model test data
+    test_labels     : behavioral labels
+    metrics         : metrics to assess labels from
+    plot            : plot charts
     """
 
     table = []
@@ -246,12 +258,14 @@ def main():
 
     print("\ntraining new models ...\n")
 
+    # eeg model
     eegnet_model = models.EEGModel(output_units=behavioral_data.shape[1], name="eegnet")
     eegnet_model.compile(optimizer=eegnet_model.optimizer, loss=eegnet_model.loss, metrics=[])
     eegnet_model.build(train_eeg_data.shape)
     eegnet_model.summary()
     eegnet_model.fit(train_eeg_data, train_behavioral_data, batch_size=1, epochs=50, validation_data=(test_eeg_data, test_behavioral_data))
 
+    # *unused* vgg-based acs mri model
     vgg_acs_model = models.VGGACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1], name="vgg_mri")
     vgg_acs_model.compile(
       optimizer=vgg_acs_model.optimizer,
@@ -262,6 +276,7 @@ def main():
     vgg_acs_model.summary()
     vgg_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=50, validation_data=(test_mri_data, test_behavioral_data))
 
+    # inception-based acs mri model
     inception_acs_model = models.InceptionACSModel(input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1], name="inception_mri")
     inception_acs_model.compile(
       optimizer=inception_acs_model.optimizer,
@@ -272,17 +287,44 @@ def main():
     inception_acs_model.summary()
     inception_acs_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=50, validation_data=(test_mri_data, test_behavioral_data))
 
+    # vgg-based neurovision model
     neurovision_model = models.NeuroVisionModel(mri_input_shape=train_mri_data.shape[1:], output_units=behavioral_data.shape[1], name="NeuroVision_vgg")
     neurovision_model.compile(optimizer=neurovision_model.optimizer, loss=neurovision_model.loss, metrics=[])
     neurovision_model([train_eeg_data[:2], train_mri_data[:2]])
     neurovision_model.summary()
     neurovision_model.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=50, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
 
+    # final inception-based neurovision model
     neurovision_model2 = models.NeuroVisionModel2(mri_input_shape=mri_data.shape[1:], eeg_input_shape=eeg_data.shape[1:], output_units=behavioral_data.shape[1], name="NeuroVision")
     neurovision_model2.compile(optimizer=neurovision_model2.optimizer, loss=neurovision_model2.loss, metrics=[])
     neurovision_model2([train_eeg_data[:2], train_mri_data[:2]])
     neurovision_model2.summary()
     neurovision_model2.fit([train_eeg_data, train_mri_data], train_behavioral_data, batch_size=1, epochs=50, validation_data=([test_eeg_data, test_mri_data], test_behavioral_data))
+
+    """
+
+    #   unused "dead" models
+
+    vgg3d_model = VGG3DModel(output_units=behavioral_data.shape[1])
+    vgg3d_model.compile(
+		optimizer=vgg3d_model.optimizer,
+		loss=vgg3d_model.loss,
+		metrics=[],
+	)
+    vgg3d_model.build(mri_data.shape)
+    vgg3d_model.summary()
+    vgg3d_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
+
+    vggsliced_model = VGGSlicedModel(output_units=behavioral_data.shape[1])
+    vggsliced_model.compile(
+		optimizer=vggsliced_model.optimizer,
+		loss=vggsliced_model.loss,
+		metrics=[],
+	)
+    vggsliced_model.build(mri_data.shape)
+    vggsliced_model.summary()
+    vggsliced_model.fit(train_mri_data, train_behavioral_data, batch_size=1, epochs=4, validation_data=(test_mri_data, test_behavioral_data))
+    """
 
     print_results(
         [center_model, median_model, mean_model, simple_nn, vgg_acs_model, inception_acs_model, eegnet_model, neurovision_model, neurovision_model2], 
