@@ -1,0 +1,1 @@
+this is a small (~500mb) preprocessed subset of total available data used for testing functionality. full dataset at http://fcon_1000.projects.nitrc.org/indi/retro/MPI_LEMON.html

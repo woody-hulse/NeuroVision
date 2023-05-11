@@ -12,6 +12,9 @@ from tqdm import tqdm
 
 """
 
+full dataset at:
+http://fcon_1000.projects.nitrc.org/indi/retro/MPI_LEMON.html
+
 create data directory outside of the NeuroVision repo:
     behavioral  - behavroral data from source
     eeg         - preprocessed data from source
